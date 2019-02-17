@@ -37,11 +37,11 @@ public class Plateau {
     }
 
     protected boolean ajouterEntite(Entite j, int x, int y, int z) {
-                /*
+        /*
                 Test s'il y a une cellule en dessous
                 puis essaye d'ajouter l'entité si oui
                 Uniquement si la cellule d'en dessous est vide !
-                */
+         */
         if (dansletableau(x, y, z) && plateau[x][y][z] != null && plateau[x][y][z].entite == null) {
             plateau[x][y][z].entite = j;
             return true;
@@ -77,6 +77,11 @@ public class Plateau {
         if (d == null) {
             return false;
         }
+
+        if (dansletableau(d.x2, d.y2, d.z2 + 1) && plateau[d.x2][d.y2][d.z2 + 1] != null) {
+            return false;
+        }
+
         if (dansletableau(d.x2, d.y2, d.z2) && !occupe(d.x2, d.y2, d.z2)) {
             if (supprimer_entite(d.entite)) {
                 plateau[d.x2][d.y2][d.z2].entite = d.entite;
@@ -88,11 +93,7 @@ public class Plateau {
     }
 
     protected boolean test_final(Entite j) {
-        if (plateau[j.getX()][j.getY()][j.getZ()].arrivee) {
-            plateau[j.getX()][j.getY()][j.getZ()].entite = null;
-            return true;
-        }
-        return false;
+        return (plateau[j.getX()][j.getY()][j.getZ()].arrivee);
     }
 
     // TESTS
@@ -139,16 +140,16 @@ public class Plateau {
             x2 = x;
         }
 
-        if(dansletableau(x,y,z+1) && plateau[x][y][z]!=null){
+        if (dansletableau(x, y, z + 1) && plateau[x][y][z] != null) {
             return null;
         }
-        
+
         if (occupe(x, y, z) && !(occupe(x2, y2, z))) {
             if (plateau[x][y][z].entite == null || !(plateau[x][y][z].entite instanceof Cellule)) {
                 return test_deplacement(plateau[x][y][z], x, y, z, d, g, h, b);
             }
             // on peut deplacer un bloc UNIQUEMENT s'il n y a pas un autre bloc au dessus
-            // (mais une balle ou une entite c'est possible)
+            // (mais une balle ou une autre entite c'est possible)
             // ajoute a la liste des deplacements possible le fait de pouvoir pousser une
             // entite, un bloc ou autre
         }
