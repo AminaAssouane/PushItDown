@@ -32,7 +32,7 @@ public class Jeu {
 	 * 
 	 * Explication:
 	 * 
-	 * La fonction action declenche la fonction du TOUR de GRID (qui implemente
+	 * La fonction action declenche la fonction TOUR de InterfaceGraphique (qui implemente
 	 * l'interface Ecouteur_Tour) l'interface Graphique se debrouille de façon à
 	 * avoir plusieurs choix - Un bouton abandonner qui modifie la valeur int choix
 	 * à (-2) - Un bouton passer tour qui modifie la valeur int choix à (-1) -
