@@ -17,15 +17,33 @@ public class Plateau {
 
     protected boolean addCellule(int x, int y, int z, boolean depart, boolean end) {
         if (dansletableau(x, y, z) && plateau[x][y][z] == null) {
-            plateau[x][y][z] = new Cellule(x, y, z, 1, null);
+            Cellule c = new Cellule(x, y, z, 1, null);
+            if (dansletableau(x, y, z - 1)) {
+                if (!ajouterEntite(c, x, y, z - 1)) {
+                    return false;
+                }
+            }
+
+            plateau[x][y][z] = c;
             plateau[x][y][z].depart = depart;
             if (depart == true) {
                 cellule_departs.add(plateau[x][y][z]);
             }
             plateau[x][y][z].arrivee = end;
-            if (dansletableau(x, y, z - 1)) {
-                plateau[x][y][z - 1].entite = plateau[x][y][z];
-            }
+
+            return true;
+        }
+        return false;
+    }
+
+    protected boolean ajouterEntite(Entite j, int x, int y, int z) {
+                /*
+                Test s'il y a une cellule en dessous
+                puis essaye d'ajouter l'entité si oui
+                Uniquement si la cellule d'en dessous est vide !
+                */
+        if (dansletableau(x, y, z) && plateau[x][y][z] != null && plateau[x][y][z].entite == null) {
+            plateau[x][y][z].entite = j;
             return true;
         }
         return false;
@@ -38,9 +56,8 @@ public class Plateau {
     private boolean add(Deplacement d, ArrayList<Deplacement> a) {
         if (d == null) {
             return false;
-        } else {
-            return a.add(d);
         }
+        return a.add(d);
     }
 
     protected boolean supprimer_entite(Entite j) {
@@ -122,6 +139,10 @@ public class Plateau {
             x2 = x;
         }
 
+        if(dansletableau(x,y,z+1) && plateau[x][y][z]!=null){
+            return null;
+        }
+        
         if (occupe(x, y, z) && !(occupe(x2, y2, z))) {
             if (plateau[x][y][z].entite == null || !(plateau[x][y][z].entite instanceof Cellule)) {
                 return test_deplacement(plateau[x][y][z], x, y, z, d, g, h, b);
