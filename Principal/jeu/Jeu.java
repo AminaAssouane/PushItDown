@@ -40,6 +40,7 @@ public class Jeu {
 	 * choixactuel) et les blocs que l'on peut pousser Chaque clic doit correpondre
 	 * à l'indice dans la L'ArrayList et doit donc modifier int choix en conséquence
 	 * - Qui passera par un controleur, qui modifiera la valeur choix
+	 * 
 	 */
 
 	private int choix;
