@@ -75,7 +75,7 @@ public class Plateau {
 
 	protected ArrayList<Deplacement> possible(Entite bille) {
 		ArrayList<Deplacement> deplacements = new ArrayList<Deplacement>();
-		// on essaye les 4 d�placements possibles
+		// on essaye les 4 déplacements possibles
 		add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), true, false, false, false), deplacements);
 		add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), false, true, false, false), deplacements);
 		add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), false, false, true, false), deplacements);
@@ -151,8 +151,8 @@ public class Plateau {
 	}
 
 	private int test_hauteur(int x, int y, int z) {
-		// retourne une hauteur possible pour un deplacement, plus basse que la
-		// coordonn�e z fournie en parametre
+		// retourne une hauteur possible pour un déplacement, plus basse que la
+		// coordonnée z fournie en paramètre
 		while (this.plateau[x][y][z] == null && z > -1) {
 			z--;
 		}
