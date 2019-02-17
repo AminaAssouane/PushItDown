@@ -106,9 +106,9 @@ public class Jeu {
     }
 
     private void fin() {
-        for (Joueur_actuel j : fini) {
+        fini.forEach((j) -> {
             j.score();
-        }
+        });
     }
 
     private void tour_suivant() {
@@ -121,9 +121,9 @@ public class Jeu {
 
     private void action(Joueur_actuel j) {
         ArrayList<Deplacement> d = new ArrayList<Deplacement>();
-        for (Bille b : j.billes) {
+        j.billes.forEach((b) -> {
             d.addAll(this.plateau.possible(b));
-        }
+        });
         if (d.isEmpty()) {
             tour_suivant();
         } else {
@@ -186,9 +186,9 @@ public class Jeu {
         }
 
         public void score() {
-            for (Bille b : billes2) {
+            billes2.forEach((b) -> {
                 this.score += b.score;
-            }
+            });
             score *= multiplicateur;
         }
 
@@ -239,19 +239,28 @@ public class Jeu {
             this.z = z;
         }
 
+        public void deplacer(int x, int y, int z){
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+        
         public void score(int reduction) {
             score -= reduction;
         }
         // A chaque deplacement, on reduit le score;
 
+        @Override
         public int getX() {
             return x;
         }
 
+        @Override
         public int getY() {
             return y;
         }
 
+        @Override
         public int getZ() {
             return z;
         }
