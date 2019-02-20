@@ -51,5 +51,25 @@ public class Grid {
 				}
 
 	}
+  
+  	Grid(JLayeredPane f, Level l, int niv){
+		this.x = l.getX(niv);
+		this.y = l.geY(niv);
+		this.z = l.getZ(niv);
+		grid = new Bloc[x][y][z];
+		int numbloc = 0;
+		int middle = 200; //=120
+		int down = 200; //= 240
+		for (int i = 0; i < x; i++){
+			for (int j = 0; j < y; j++){
+				for (int k = 0; k < z; k++) {
+					grid[i][j][k] = new Bloc(l.niveau(niv,numbloc));
+					grid[i][j][k].jl.setBounds(middle + (20 * k) - (20 * j),down + (k * 10) + (10 * j) - (20 * i),40, 40);
+					numbloc++;
+					f.add(grid[i][j][k].jl,numbloc,0);
+				}
+			}
+		}
+	}
 
 }
