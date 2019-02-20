@@ -11,7 +11,7 @@ public class Jeu {
     // Si nombre de retour est négatif, le nombre de retour en arri�re possible est
     // Infini
 
-    private ArrayList<Joueur_actuel> participants;
+    private ArrayList<Joueur_actuel> participants = new ArrayList<Joueur_actuel>();
     // Possibilit� d'avoir un jeu multi-joueur
 
     private ArrayList<Joueur_actuel> fini;
@@ -59,6 +59,13 @@ public class Jeu {
         Evenement.creerBille();
     }
 
+    protected boolean addActuel(Joueur_actuel j){
+        if(this.participants.contains(j)){
+            return false;
+        }
+        return this.participants.add(j);
+    }
+    
     protected void choisir(int n) {
         this.choix = n;
     }
@@ -94,7 +101,7 @@ public class Jeu {
     }
 
     private void init() {
-        if (encours = false) {
+        if (encours == false) {
             encours = true;
         }
         if (participants.isEmpty()) {
@@ -179,7 +186,7 @@ public class Jeu {
         this.choixactuel = choixactuel;
     }
 
-    private class Joueur_actuel extends Joueur {
+    protected class Joueur_actuel extends Joueur {
 
         private Joueur_actuel(String nom) {
             super(nom);
@@ -239,6 +246,7 @@ public class Jeu {
             this.z = z;
         }
 
+        @Override
         public void deplacer(int x, int y, int z){
             this.x = x;
             this.y = y;
