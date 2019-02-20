@@ -5,7 +5,21 @@ import jeu.Plateau.Deplacement;
 
 //MODELE DU JEU
 public class Jeu {
+    /* 
+    Il y a une fonction ArrayList <Deplacement> possible(Entite Bille) 
+    qui applique 4 fois  la fonction test_deplacement (droit gauche haut bas) 
+    avec des arguments différents à chaque fois puis qui renvoi une Liste avec 
+    tous les déplacements possible. 
+    
+    La fonction  test_deplacement() prévoit à la fois de se déplacer OU 
+    de déplacer un bloc en fonction de la situation 
+    et renvoi le déplacement correspondant.
 
+    Dans le programme, j'ai conçu le jeu de manière à ce que possible 
+    soit appelé et retourne une liste. Dans l'idée, pour l'affichage 
+    et le contrôleur, il n y qu'à récupérer cette liste de déplacements 
+    dans la classe Jeu avec l'arraylist choixactuel.
+    */
     Ecouteur_Tour EventTour;
     private int nbRetour;
     // Si nombre de retour est négatif, le nombre de retour en arri�re possible est
@@ -41,7 +55,6 @@ public class Jeu {
 	 * - Qui passera par un controleur, qui modifiera la valeur choix
 	 * 
      */
-	 
     private int choix;
     private boolean momentdechoisir;
     private ArrayList<Deplacement> choixactuel;
@@ -59,13 +72,13 @@ public class Jeu {
         Evenement.creerBille();
     }
 
-    protected boolean addActuel(Joueur_actuel j){
-        if(this.participants.contains(j)){
+    protected boolean addActuel(Joueur_actuel j) {
+        if (this.participants.contains(j)) {
             return false;
         }
         return this.participants.add(j);
     }
-    
+
     protected void choisir(int n) {
         this.choix = n;
     }
@@ -247,12 +260,12 @@ public class Jeu {
         }
 
         @Override
-        public void deplacer(int x, int y, int z){
+        public void deplacer(int x, int y, int z) {
             this.x = x;
             this.y = y;
             this.z = z;
         }
-        
+
         public void score(int reduction) {
             score -= reduction;
         }
