@@ -1,6 +1,6 @@
 package jeu;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Grid {
 	Bloc grid[][][];
