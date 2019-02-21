@@ -22,39 +22,74 @@ public class Bloc {
 
 	Bloc() {
 		jl = new JLabel(ii);
-//		jl.setBounds(0, 0, 40, 40);
 	}
 
 	Bloc(Byte i) {
 		switch (i) {
 		case 0:
 			jl = new JLabel(ii0);
+			jl.setName("ii0");
 			break;
 		case 1:
 			jl = new JLabel(ii);
+			jl.setName("ii");
 			break;
 		case 2:
 			jl = new JLabel(ii2);
+			jl.setName("ii2");
 			break;
 		case 3:
 			jl = new JLabel(ii3);
+			jl.setName("ii3");
 			break;
 		case 4:
 			jl = new JLabel(ii4);
+			jl.setName("ii4");
 			break;
 		case 5:
 			jl = new JLabel(ii5);
+			jl.setName("ii5");
 			break;
 		case 6:
 			jl = new JLabel(ii6);
+			jl.setName("ii6");
 			break;
 		case 7:
 			jl = new JLabel(ii7);
+			jl.setName("ii7");
 			break;
 		case 8:
 			jl = new JLabel(ii8);
+			jl.setName("ii8");
 			break;
 		}
 		jl.setBounds(0, 0, 40, 40);
 	}
+  		
+  	public void deplacer(int x,int y, int z){
+		jl.setBounds(200+(x*20), 200-((z+1)*20 + 2), 40, 40);	
+	}
+	
+  
+  /** Setters and Getters **/
+ 		public int getX(){
+			return this.x;
+		}
+		public int getY(){
+			return this.y;
+		}
+		public int getZ(){
+			return this.z;
+		}
+		
+		
+		public void setX(int x){
+			this.x = x;
+		}
+		public void setY(int y){
+			this.y = y;
+		}
+		public void setZ(int z){
+			this.z = z;
+		}
 }
