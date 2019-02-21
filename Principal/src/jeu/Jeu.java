@@ -58,6 +58,10 @@ public class Jeu {
     private int choix;
     private boolean momentdechoisir;
     private ArrayList<Deplacement> choixactuel;
+	
+    public ArrayList<Deplacement> getChoixactuel(){
+	return this.choixactuel;
+    }
 
     public boolean getMoment() {
         return momentdechoisir;

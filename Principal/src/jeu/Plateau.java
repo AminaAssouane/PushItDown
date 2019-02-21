@@ -145,6 +145,7 @@ public class Plateau {
         }
 
         if (occupe(x, y, z) && !(occupe(x2, y2, z))) {
+
             if (plateau[x][y][z].entite == null || !(plateau[x][y][z].entite instanceof Cellule)) {
                 return test_deplacement(plateau[x][y][z], x, y, z, d, g, h, b);
             }
