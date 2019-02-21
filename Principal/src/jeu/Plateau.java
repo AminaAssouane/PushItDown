@@ -6,10 +6,34 @@ public class Plateau {
 
     private Cellule[][][] plateau;
     private ArrayList<Cellule> cellule_departs = new ArrayList<Cellule>();
+    int x,y,z;
 
     protected Plateau(int x, int y, int z) {
         this.plateau = new Cellule[x][y][z];
+      	this.x = x; this.y = y; this.z = z;
     }
+  
+  	public Plateau(JLayeredPane f, Level l, int niv, Bille b){
+		this.x = l.getX(niv);
+		this.y = l.getY(niv);
+		this.z = l.getZ(niv);
+		plateau  = new Cellule[x][y][z];
+		int numbloc = 0;
+		int middle = 200; //=120
+		int down = 200; //= 240
+		for (int k = 0; k < z; k++){
+			for (int j = 0; j < y; j++){
+				for (int i = 0; i < x; i++) {
+					plateau[i][j][k] = new Cellule(i,j,k,l.niveau(niv,numbloc));
+					plateau[i][j][k].jl.setBounds(middle + (20 * i) - (20 * j),down + (i * 10) + (10 * j) - (20 * k),40, 40);
+					numbloc++;
+					f.add(plateau[i][j][k].jl,numbloc,1);
+					System.out.println(numbloc);
+				}
+			}
+		}
+		plateau[0][0][z-1].setEntite(b);
+	}
 
     protected boolean getDepart(int x, int y, int z) {
         return cellule_departs.stream().anyMatch((c) -> (c.z == z && c.x == x && c.y == y));
@@ -78,7 +102,7 @@ public class Plateau {
             return false;
         }
 
-        if (dansletableau(d.x2, d.y2, d.z2 + 1) && plateau[d.x2][d.y2][d.z2 + 1] != null) {
+        if (dansletableau(d.x2, d.y2, d.z2 + 1) && ((plateau[d.x2][d.y2][d.z2 + 1] != null) && (plateau[d.x2][d.y2][d.z2 + 1].jl.getName() != "ii0"))) {
             return false;
         }
 
@@ -86,6 +110,9 @@ public class Plateau {
             if (supprimer_entite(d.entite)) {
                 plateau[d.x2][d.y2][d.z2].entite = d.entite;
                 d.entite.deplacer(d.x2, d.y2, d.z2);
+                d.entite.setX(d.x2);
+                d.entite.setY(d.y2);
+                d.entite.setZ(d.z2);
                 return true;
             }
         }
@@ -211,25 +238,14 @@ public class Plateau {
             this.entite = entite;
         }
 
-        public int getColore() {
-            return this.color;
-        }
-
         public boolean isArrivee() {
             return arrivee;
-        }
-
-        public void setArrivee(boolean arrivee) {
-            this.arrivee = arrivee;
         }
 
         public boolean isDepart() {
             return depart;
         }
 
-        public void setDepart(boolean depart) {
-            this.depart = depart;
-        }
 
         @Override
         public void deplacer(int x, int y, int z) {
@@ -237,6 +253,9 @@ public class Plateau {
             this.y = y;
             this.z = z;
         }
+      
+      
+      /** Getters and Setters **/
 
         @Override
         public int getX() {
@@ -252,6 +271,38 @@ public class Plateau {
         public int getZ() {
             return z;
         }
+      	
+      	@Override
+      	public void setX(int x){
+			this.x = x;
+		}
+      
+      	@Override
+		public void setY(int y){
+			this.y = y;
+		}
+      
+      	@Override
+		public void setZ(int z){
+			this.z = z;
+		}
+      
+      	public int getColore() {
+            return this.color;
+        }
+      
+      	public void setArrivee(boolean arrivee) {
+            this.arrivee = arrivee;
+        }
+      
+      	public void setDepart(boolean depart) {
+            this.depart = depart;
+        }
+      
+      	public void setEntite(Entite e){
+        	this.entite = e;
+        }
+      
     }
 
     protected class Deplacement {
