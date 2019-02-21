@@ -8,7 +8,7 @@ import javax.swing.*;
 public class Main {
 	
 	
-	public static void main(String args[]) {
+	public static void main(String []args) {
 //		Sortie s[];
 		JFrame f = new JFrame(); 
 		f.setBounds(100, 100, 450, 300);

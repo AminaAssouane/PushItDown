@@ -24,7 +24,6 @@ public class Jeu {
     private int nbRetour;
     // Si nombre de retour est négatif, le nombre de retour en arri�re possible est
     // Infini
-
     private ArrayList<Joueur_actuel> participants = new ArrayList<Joueur_actuel>();
     // Possibilit� d'avoir un jeu multi-joueur
 
@@ -55,6 +54,7 @@ public class Jeu {
 	 * - Qui passera par un controleur, qui modifiera la valeur choix
 	 * 
      */
+
     private int choix;
     private boolean momentdechoisir;
     private ArrayList<Deplacement> choixactuel;
