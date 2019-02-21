@@ -17,7 +17,8 @@ public class Main {
 		JLayeredPane pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
       
-        pa.setFocusable(true);
+      // On ajoute un keyListener pour déplacer la bille avec les flèches du clavier
+        	pa.setFocusable(true);
 		pa.addKeyListener(new Deplacement());
 			
 		Bille b = new Bille(200, 78, 1, pa);
