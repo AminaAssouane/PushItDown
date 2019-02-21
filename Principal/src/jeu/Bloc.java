@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 
 public class Bloc implements Entite{
 	JLabel jl;
+    int x,y,z;
 	static ImageIcon ii0 = new ImageIcon("CUBE0.png");
 	static ImageIcon ii = new ImageIcon("CUBE.png");
 	static ImageIcon ii2 = new ImageIcon("CUBEa.png");
