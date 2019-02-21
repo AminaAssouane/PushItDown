@@ -1,6 +1,8 @@
 package jeu;
 
 import java.util.ArrayList;
+import javax.swing.JLayeredPane;
+
 
 public class Plateau {
 
