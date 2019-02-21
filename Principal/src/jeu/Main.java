@@ -13,6 +13,7 @@ public class Main {
 		JFrame f = new JFrame(); 
 		f.setBounds(100, 100, 450, 300);
 		
+      // On utilise JLayeredPane pour pouvoir supérposer les blocs proprement
 		JLayeredPane pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
 			
