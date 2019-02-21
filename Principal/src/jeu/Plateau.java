@@ -24,7 +24,7 @@ public class Plateau {
 		for (int k = 0; k < z; k++){
 			for (int j = 0; j < y; j++){
 				for (int i = 0; i < x; i++) {
-					plateau[i][j][k] = new Cellule(i,j,k,l.niveau(niv,numbloc));
+					plateau[i][j][k] = new Cellule(i,j,k,l.niveau(niv,numbloc),b);
 					plateau[i][j][k].jl.setBounds(middle + (20 * i) - (20 * j),down + (i * 10) + (10 * j) - (20 * k),40, 40);
 					numbloc++;
 					f.add(plateau[i][j][k].jl,numbloc,1);
