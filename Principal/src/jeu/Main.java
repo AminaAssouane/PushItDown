@@ -16,6 +16,9 @@ public class Main {
       // On utilise JLayeredPane pour pouvoir supérposer les blocs proprement
 		JLayeredPane pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
+      
+        pa.setFocusable(true);
+		pa.addKeyListener(new Deplacement());
 			
 		Bille b = new Bille(200, 78, 1, pa);
 
