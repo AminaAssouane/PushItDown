@@ -219,7 +219,7 @@ public class Plateau {
         }
     }
 
-    protected class Cellule implements Entite {
+    protected class Cellule extends Bille implements Entite {
 
         private int x;
         private int y;
