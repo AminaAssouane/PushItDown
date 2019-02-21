@@ -8,38 +8,29 @@ import javax.swing.*;
 public class Main {
 	
 	
-	public static void main(String []args) {
-//		Sortie s[];
+	public static void main(String args[]) {
 		JFrame f = new JFrame(); 
 		f.setBounds(100, 100, 450, 300);
 		
-      // On utilise JLayeredPane pour pouvoir supérposer les blocs proprement
 		JLayeredPane pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
-      
-      // On ajoute un keyListener pour déplacer la bille avec les flèches du clavier
-        	pa.setFocusable(true);
-		pa.addKeyListener(new Deplacement());
-			
-		Bille b = new Bille(200, 78, 1, pa);
+		
+		Level l = new Level();
+		int niveau = 1;
+		
+		pa.setFocusable(true);
+		
+		Bille b = new Bille(0, 0, l.getZ(niveau)-1, pa);
+		Plateau plat = new Plateau(pa,l,niveau,b);
 
-      // Dans la fonction Grid on a qu'à indiqué le niveau (ici le niveau est 1, et il n'y a que 2 niveaux pour 
-      // l'instant.
-      // Les niveaux sont stockés dans la classe "Level", et sont choisi à partir de la fonction "niveau"
-      // L'utilisateur n'a pas besoin de spécifié les coordonnées x, y et z du niveau, celles si sont donné par la
-      // classe "Level"
-      
-		new Grid(pa,new Level(),1);
-		f.setSize(500, 500); 
+		pa.addKeyListener(new Deplacement(plat,b));
+		f.setSize(500, 500);
+		
 		
 		f.getContentPane().add(pa, BorderLayout.CENTER);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		f.setVisible(true);
 		
-		/*for(int i = 0;i<8;i++) {
-			b.moveright();
-//			f.update(jl.getGraphics());
-		}*/
-	}
 
+	}
 }
