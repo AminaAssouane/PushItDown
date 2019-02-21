@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class Bloc {
+public class Bloc implements Entite{
 	JLabel jl;
 	static ImageIcon ii0 = new ImageIcon("CUBE0.png");
 	static ImageIcon ii = new ImageIcon("CUBE.png");
