@@ -1,9 +1,39 @@
 package jeu;
 
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.*;  
+
 public class InterfaceGraphique_Jeu implements Ecouteur_Tour, Ecouteur_DebutPartie  {
 	private Controleur_Tour controleurtour = new Controleur_Tour();
-	private Controleur_DebutPartie debutpartie = new Controleur_DebutPartie();
+	
 	@Override
+	
+	public void nouvellePartie(){
+		JFrame f = new JFrame(); 
+		f.setBounds(100, 100, 450, 300);
+		
+		JLayeredPane pa = new JLayeredPane();
+		pa.setPreferredSize(new Dimension(500, 500));
+		Level l = new Level();
+		int niveau = 3;
+		
+		pa.setFocusable(true);
+		
+		Bille b = new Bille(0, 0, l.getZ(niveau)-1, pa);
+		Plateau plat = new Plateau(pa,l,niveau,b);
+
+		pa.addKeyListener(new Deplacement(plat,b));
+		
+		f.setSize(500, 500);
+		f.getContentPane().setBackground(new Color(0, 206, 209));
+		f.setLocationRelativeTo(null);
+		f.getContentPane().add(pa, BorderLayout.CENTER);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		f.setVisible(true);
+	}
+	
 	public void tour() {
 		int n = 0;
 		

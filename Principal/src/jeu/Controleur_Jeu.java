@@ -53,4 +53,10 @@ public class Controleur_Jeu implements Ecouteur_Tour, Ecouteur_DebutPartie  {
     public void creerBille() {
         // TODO Auto-generated method stub
     }
+
+	@Override
+	public void nouvellePartie() {
+		// TODO Auto-generated method stub
+		
+	}
 }

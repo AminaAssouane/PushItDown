@@ -8,4 +8,6 @@ public interface Ecouteur_DebutPartie {
 	public void choisirRegle();
 
 	public void creerBille();
+
+	public void nouvellePartie();
 }
