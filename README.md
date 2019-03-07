@@ -1,2 +1,2 @@
-Le code du projet est dans le dossier "Principal"
+Le code du projet est dans le dossier "Principal".
 On peut aussi y trouver un Diagramme de Gantt qui représente graphiquement l'avancement dans le temps de notre projet ainsi que la répartition des tâches.
