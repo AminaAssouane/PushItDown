@@ -74,4 +74,6 @@ public class InterfaceGraphique_Jeu implements Ecouteur_Tour, Ecouteur_DebutPart
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 }

@@ -26,10 +26,12 @@ public class Accueil {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+
+		Controleur_DebutPartie cd = new Controleur_DebutPartie();
+		
 		JButton btnNewButton = new JButton("Nouveau joueur");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Controleur_DebutPartie cd = new Controleur_DebutPartie();
 				cd.nouvellePartie();
 				frame.setVisible(false);
 			}
@@ -50,6 +52,16 @@ public class Accueil {
 		JButton btnNewButton_2 = new JButton("Classement");
 		btnNewButton_2.setBounds(170, 327, 132, 23);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Help");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cd.help();
+				frame.setVisible(false);
+			}
+		});
+		btnNewButton_3.setBounds(170, 361, 132, 23);
+		frame.getContentPane().add(btnNewButton_3);
 
 	}
 }

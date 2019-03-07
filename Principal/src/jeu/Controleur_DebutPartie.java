@@ -15,5 +15,9 @@ public class Controleur_DebutPartie implements Ecouteur_DebutPartie {
 		ij.nouvellePartie();
 	}
 	
+	public void help(){
+		Help h = new Help();
+	}
+	
 
 }
