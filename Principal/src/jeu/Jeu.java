@@ -59,7 +59,7 @@ public class Jeu {
     private boolean momentdechoisir;
     private ArrayList<Deplacement> choixactuel;
 	
-    public ArrayList<Deplacement> getChoixactuel(){
+    public ArrayList<Deplacement> getChoixactuel1(){
 	return this.choixactuel;
     }
 
@@ -67,13 +67,9 @@ public class Jeu {
         return momentdechoisir;
     }
 
-    public Jeu(int nbRetour, ArrayList<Bille> bille, Plateau plateau, ArrayList<Joueur> participants, InterfaceGraphique_Jeu Evenement) {
+    public Jeu(int nbRetour, ArrayList<Bille> bille, Plateau plateau, ArrayList<Joueur> participants) {
         this.nbRetour = nbRetour;
         this.plateau = plateau;
-        this.EventTour = Evenement;
-        Evenement.choisirCarte();
-        Evenement.creerJoueur();
-        Evenement.creerBille();
     }
 
     protected boolean addActuel(Joueur_actuel j) {
@@ -289,5 +285,23 @@ public class Jeu {
         public int getZ() {
             return z;
         }
+
+		@Override
+		public void setX(int x) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void setY(int y) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void setZ(int z) {
+			// TODO Auto-generated method stub
+			
+		}
     }
 }

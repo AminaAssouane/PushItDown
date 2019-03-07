@@ -9,16 +9,18 @@ public class Plateau {
     private Cellule[][][] plateau;
     private ArrayList<Cellule> cellule_departs = new ArrayList<Cellule>();
     int x,y,z;
+    private JLayeredPane f;
 
     protected Plateau(int x, int y, int z) {
         this.plateau = new Cellule[x][y][z];
       	this.x = x; this.y = y; this.z = z;
     }
   
-  	public Plateau(JLayeredPane f, Level l, int niv, Bille b){
+    public Plateau(JLayeredPane f, Level l, int niv, Bille b){
 		this.x = l.getX(niv);
 		this.y = l.getY(niv);
 		this.z = l.getZ(niv);
+		this.f = f;
 		plateau  = new Cellule[x][y][z];
 		int numbloc = 0;
 		int middle = 200; //=120
@@ -26,11 +28,15 @@ public class Plateau {
 		for (int k = 0; k < z; k++){
 			for (int j = 0; j < y; j++){
 				for (int i = 0; i < x; i++) {
-					plateau[i][j][k] = new Cellule(i,j,k,l.niveau(niv,numbloc),b);
-					plateau[i][j][k].jl.setBounds(middle + (20 * i) - (20 * j),down + (i * 10) + (10 * j) - (20 * k),40, 40);
-					numbloc++;
-					f.add(plateau[i][j][k].jl,numbloc,1);
-					System.out.println(numbloc);
+					if (l.niveau(niv, numbloc) != 0){
+						plateau[i][j][k] = new Cellule(i,j,k,l.niveau(niv,numbloc),l.arrivee(niv, numbloc));
+						plateau[i][j][k].jl.setBounds(middle + (20 * i) - (20 * j),down + (i * 10) + (10 * j) - (20 * k),40, 40);
+						numbloc++;
+						f.add(plateau[i][j][k].jl,numbloc,1);
+					} else {
+						plateau[i][j][k] = null;
+						numbloc++;
+					}
 				}
 			}
 		}
@@ -85,6 +91,25 @@ public class Plateau {
         }
         return a.add(d);
     }
+    
+    // retourne une hauteur possible pour un déplacement, plus basse que la
+    // coordonnée z fournie en paramètre
+    private int test_hauteur(int x, int y, int z) {
+    	if (dansletableau(x,y,z)){
+    		while (this.plateau[x][y][z] == null && z > -1)
+    			z--;
+    		if (this.plateau[x][y][z].entite == null)
+    			return z;
+    		else 
+    			return -1;
+    	}
+    	else return -1;
+    }
+    
+    protected boolean test_final(Entite j) {
+        return (plateau[j.getX()][j.getY()][j.getZ()].arrivee);
+    }
+    
 
     protected boolean supprimer_entite(Entite j) {
         if (j == null) {
@@ -107,23 +132,22 @@ public class Plateau {
         if (dansletableau(d.x2, d.y2, d.z2 + 1) && ((plateau[d.x2][d.y2][d.z2 + 1] != null) && (plateau[d.x2][d.y2][d.z2 + 1].jl.getName() != "ii0"))) {
             return false;
         }
+        
+        d.setZ2(test_hauteur(d.x2,d.y2,d.z2));
 
-        if (dansletableau(d.x2, d.y2, d.z2) && !occupe(d.x2, d.y2, d.z2)) {
+        if ((d.z2 != -1) && dansletableau(d.x2, d.y2, d.z2) && !occupe(d.x2, d.y2, d.z2)) {
             if (supprimer_entite(d.entite)) {
                 plateau[d.x2][d.y2][d.z2].entite = d.entite;
                 d.entite.deplacer(d.x2, d.y2, d.z2);
                 d.entite.setX(d.x2);
                 d.entite.setY(d.y2);
                 d.entite.setZ(d.z2);
-                return true;
+                return test_final(d.entite);
             }
         }
         return false;
     }
 
-    protected boolean test_final(Entite j) {
-        return (plateau[j.getX()][j.getY()][j.getZ()].arrivee);
-    }
 
     // TESTS
     protected ArrayList<Deplacement> possible(Entite bille) {
@@ -207,20 +231,6 @@ public class Plateau {
         return (dansletableau(x, y, z) && plateau[x][y][z].entite != null);
     }
 
-    private int test_hauteur(int x, int y, int z) {
-        // retourne une hauteur possible pour un dÃ©placement, plus basse que la
-        // coordonnÃ©e z fournie en paramÃ¨tre
-        while (this.plateau[x][y][z] == null && z > -1) {
-            z--;
-        }
-        if (this.plateau[x][y][z].entite == null) {
-            return z;
-        } else {
-            return -1;
-            // -1 signifie qu'il n y a pas de case disponible
-        }
-    }
-
     protected class Cellule extends Bille implements Entite {
 
         private int x;
@@ -238,6 +248,15 @@ public class Plateau {
             this.z = z;
             this.color = color;
             this.entite = entite;
+        }
+        
+        public Cellule(int x, int y, int z, Byte b, boolean bool){
+        	super(b);
+        	this.x = x;
+            this.y = y;
+            this.z = z;
+        	this.entite = null;
+        	this.arrivee = bool;
         }
 
         public boolean isArrivee() {
@@ -344,5 +363,14 @@ public class Plateau {
         public Entite getEntite() {
             return entite;
         }
+        
+     // GETTERS AND SETTERS 
+        public void setZ2(int z){
+        	this.z2 = z;
+        }
     }
+    
+    
+    // GETTERS AND SETTERS
+    public JLayeredPane getPanel(){ return this.f; }
 }

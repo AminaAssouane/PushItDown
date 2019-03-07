@@ -21,7 +21,7 @@ public class Bille extends Bloc implements Entite{
 		this.x=x;
 		this.y=y;
 		this.z=z;
-		jl= new JLabel(new ImageIcon("C:\\Users\\HP\\Desktop\\Semestre6\\ProjetL2\\ProjetJ\\src\\BALL.png"));
+		jl= new JLabel(new ImageIcon("BALL.png"));
 		jl.setBounds(200, 200-((z+1)*20 + 2), 40, 40);
 		f.add(jl,1000,1);
 	}

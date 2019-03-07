@@ -117,15 +117,41 @@ public class Level {
 	}
 	
 	
-	public Byte niveau(int niv,int bloc){
-		switch (niv){
-		case 1:
-			return level1[bloc];
-		case 2:
-			return level2[bloc];
-		default :
-			return level1[bloc];
+	// Fonction qui retourne le "byte" correspondant au bloc voulu
+		public Byte niveau(int niv,int numbloc){
+			switch (niv){
+			case 1:
+				return level1[numbloc];
+			case 2:
+				return level2[numbloc];
+			case 3 :
+				return level3[numbloc];
+			default :
+				return level1[numbloc];
+			}
 		}
-	}
+	
+	// Fonction qui retourne si oui ou non la case est une case d'arrivée (de sortie)	
+		public boolean arrivee(int niv, int numbloc){
+			switch (niv){
+			case 1:
+				if (numbloc == 35) 
+					return true;
+				else
+					return false;
+			case 2:
+				if (numbloc == 35) 
+					return true;
+				else
+					return false;
+			case 3:
+				if (numbloc == 35) 
+					return true;
+				else
+					return false;
+			default: 
+					return false;
+			}
+		}
 
 }
