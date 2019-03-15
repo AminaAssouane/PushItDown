@@ -53,15 +53,20 @@ public class Accueil {
 		btnNewButton_2.setBounds(170, 327, 132, 23);
 		frame.getContentPane().add(btnNewButton_2);
 		
+		Help h = new Help(this);
 		JButton btnNewButton_3 = new JButton("Help");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cd.help();
-				frame.setVisible(false);
+				h.getFrame().setVisible(true);
 			}
 		});
 		btnNewButton_3.setBounds(170, 361, 132, 23);
 		frame.getContentPane().add(btnNewButton_3);
-
+	}
+	
+	// GETTERS AND SETTERS
+	
+	public JFrame getFrame(){
+		return this.frame;
 	}
 }

@@ -1,4 +1,4 @@
-package jeu;
+/*package jeu;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +17,7 @@ public class InterfaceGraphique_Jeu implements Ecouteur_Tour, Ecouteur_DebutPart
 		JLayeredPane pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
 		Level l = new Level();
-		int niveau = 3;
+		int niveau = 1;
 		
 		pa.setFocusable(true);
 		
@@ -77,3 +77,4 @@ public class InterfaceGraphique_Jeu implements Ecouteur_Tour, Ecouteur_DebutPart
 	
 	
 }
+*/

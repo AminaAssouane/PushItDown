@@ -1,20 +1,19 @@
 package jeu;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Deplacement implements KeyListener{
 
 	Plateau plat;
 	Bille b;
+	JButton btnNext;
 	JLabel feux = new JLabel(new ImageIcon("blue.gif"));
 	JLabel feux2 = new JLabel(new ImageIcon("pink.gif"));
-	public Deplacement(Plateau plat, Bille b){
+	public Deplacement(Plateau plat, Bille b, JButton btn){
 		this.plat = plat;
 		this.b = b;
+		this.btnNext = btn;
 	}
 	
 	@Override
@@ -68,11 +67,20 @@ public class Deplacement implements KeyListener{
 		
 	}
 	
+	public void efface(){
+		this.plat.getPanel().remove(feux);
+		this.plat.getPanel().remove(feux2);
+	}
+	
 	public void gagne(){
+		/* Feux d'artifices */
 		feux.setBounds(0, 0, 500, 500);
 		feux2.setBounds(-20, -20, 500, 500);
 		this.plat.getPanel().add(feux,1000,1);
 		this.plat.getPanel().add(feux2,1000,1);
+		/* Le bouton NEXT s'affiche */
+		if (btnNext != null) 
+			btnNext.setVisible(true);
 	}
 
 }

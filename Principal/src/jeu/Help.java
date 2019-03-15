@@ -3,17 +3,26 @@ package jeu;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Help {
 	
 	private JFrame frame;
+	private Accueil a;
 	
 	public Help() {
 		initialize();
 		frame.setVisible(true);
+	}
+	
+	public Help(Accueil a) {
+		initialize();
+		this.a = a;
 	}
 	
 	private void initialize() {
@@ -44,6 +53,22 @@ public class Help {
 		lblNewLabel_3.setFont(new Font("Royal Acidbath", Font.BOLD, 45));
 		lblNewLabel_3.setBounds(161, 68, 176, 69);
 		frame.getContentPane().add(lblNewLabel_3);
+		
+		JButton btnRetour = new JButton("Retour");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				a.getFrame().setVisible(true);
+			}
+		});
+		btnRetour.setBounds(192, 389, 89, 23);
+		frame.getContentPane().add(btnRetour);
+	}
+	
+	// GETTERS AND SETTERS
+	
+	public JFrame getFrame(){
+			return this.frame;
 	}
 
 }

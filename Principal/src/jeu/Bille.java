@@ -1,12 +1,6 @@
 package jeu;
 
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Bille extends Bloc implements Entite{
 	int x,y,z;
@@ -24,6 +18,11 @@ public class Bille extends Bloc implements Entite{
 		jl= new JLabel(new ImageIcon("BALL.png"));
 		jl.setBounds(200, 200-((z+1)*20 + 2), 40, 40);
 		f.add(jl,1000,1);
+	}
+	
+	/* Efface la bille */
+	public void efface(){
+		this.f.remove(jl);
 	}
 	
 	public void deplacer(int x,int y, int z){

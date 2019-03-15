@@ -1,7 +1,7 @@
 package jeu;
 
 public class Controleur_DebutPartie implements Ecouteur_DebutPartie {
-	InterfaceGraphique_Jeu ij = new InterfaceGraphique_Jeu();
+	InterfaceJeu ij = new InterfaceJeu();
 	
 	public void creerJoueur(){ }
 

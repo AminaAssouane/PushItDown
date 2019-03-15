@@ -8,8 +8,9 @@ public class Plateau {
 
     private Cellule[][][] plateau;
     private ArrayList<Cellule> cellule_departs = new ArrayList<Cellule>();
-    int x,y,z;
+    int x,y,z,niv;
     private JLayeredPane f;
+    private Level l;
 
     protected Plateau(int x, int y, int z) {
         this.plateau = new Cellule[x][y][z];
@@ -17,7 +18,9 @@ public class Plateau {
     }
   
     public Plateau(JLayeredPane f, Level l, int niv, Bille b){
-		this.x = l.getX(niv);
+    	this.niv = niv;
+    	this.l = l;
+    	this.x = l.getX(niv);
 		this.y = l.getY(niv);
 		this.z = l.getZ(niv);
 		this.f = f;
@@ -42,6 +45,22 @@ public class Plateau {
 		}
 		plateau[0][0][z-1].setEntite(b);
 	}
+    
+    public void efface(){
+    	int numbloc = 0;
+    	for (int k = 0; k < this.z; k++){
+			for (int j = 0; j < this.y; j++){
+				for (int i = 0; i < this.x; i++) {
+					if (l.niveau(niv, numbloc) != 0){
+						numbloc++;
+						f.remove(plateau[i][j][k].jl);
+					} else {
+						numbloc++;
+					}
+				}
+			}
+    	}
+    }
 
     protected boolean getDepart(int x, int y, int z) {
         return cellule_departs.stream().anyMatch((c) -> (c.z == z && c.x == x && c.y == y));
@@ -96,10 +115,14 @@ public class Plateau {
     // coordonnée z fournie en paramètre
     private int test_hauteur(int x, int y, int z) {
     	if (dansletableau(x,y,z)){
-    		while (this.plateau[x][y][z] == null && z > -1)
+    		while (this.plateau[x][y][z] == null && z > 0)
     			z--;
-    		if (this.plateau[x][y][z].entite == null)
-    			return z;
+    		if (this.plateau[x][y][z] != null){
+    			if (this.plateau[x][y][z].entite == null)
+    				return z;
+    			else 
+    				return -1;
+    		}
     		else 
     			return -1;
     	}
