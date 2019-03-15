@@ -4,6 +4,19 @@ public class Level {
 	savedpath sp;
 	//x = 6; y = 6; z = 6
 	
+    /* Les niveaux sont crées comme suit : */
+    /*
+    1. Les "0x0" correspondent à des bloques vides, les "0x1" à des blocs normaux (marrons), les "0x2" aux blocs 
+    finaux (verts), et les "0x3" aux blocs de début (bleu)
+
+    2. Chaque "bloc" est un étage, donc le level 1 qui ne contient qu'un seul "bloc" ne contient qu'un seul étage, 
+    et le niveau 3 contient 6 étages. Ceci correspond à l'axe Z.
+    
+    3. Chaque ligne correspond à une ligne de l'axe X. Donc déplacement avec les touches gauche et droite du clavier.
+    
+    4. Chaque colonne correspond à une ligne de l'axe Y. Donc déplacement avec les touches haut et bas du clavier.
+    */
+  
 	Byte[] level1 = { 
 			
 			0x3,0x1,0x1,0x1,0x1,0x1,
@@ -27,14 +40,14 @@ public class Level {
 	};
 	
 	Byte[] level3 = { 
-			//1er étage
+			//1er Ã©tage
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x2,
-			//2éme étage
+			//2Ã©me Ã©tage
 			0x1,0x1,0x1,0x1,0x1,0x0,
 			0x1,0x1,0x1,0x1,0x1,0x0,
 			0x1,0x1,0x1,0x1,0x1,0x0,
@@ -131,7 +144,7 @@ public class Level {
 			}
 		}
 	
-	// Fonction qui retourne si oui ou non la case est une case d'arriv�e (de sortie)	
+	// Fonction qui retourne si oui ou non la case est une case d'arrivée (de sortie)	
 		public boolean arrivee(int niv, int numbloc){
 			switch (niv){
 			case 1:
