@@ -9,6 +9,8 @@ public interface Entite {
      * @param z
      */
     public void deplacer(int x, int y, int z);
+    public void deplacer(int x, int y, int z, int numBloc);
+
     
     /** Getters and Setters **/
 	public int getX();

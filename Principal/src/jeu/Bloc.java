@@ -6,11 +6,15 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
 public class Bloc implements Entite{
-	JLabel jl;
-    int x,y,z;
-	static ImageIcon ii0 = new ImageIcon("CUBE0.png");
+	
+	protected JLabel jl;
+	protected JLayeredPane pa;
+	protected int numBloc; // entier qui sert à superposer les composants ((numBloc1 > numBloc2) -> le bloc de numBloc1 est devant celui de numBloc2 
+    private int x,y,z;
+	static ImageIcon vide = new ImageIcon("CUBE0.png");
 	static ImageIcon ii = new ImageIcon("CUBE.png");
 	static ImageIcon ii2 = new ImageIcon("CUBEa.png");
 	static ImageIcon ii3 = new ImageIcon("CUBEb.png");
@@ -25,11 +29,11 @@ public class Bloc implements Entite{
 		jl = new JLabel(ii);
 	}
 
-	Bloc(Byte i) {
+	Bloc(Byte i, JLayeredPane pa, int numBloc) {
 		switch (i) {
 		case 0:
-			jl = new JLabel(ii0);
-			jl.setName("ii0");
+			jl = new JLabel(vide);
+			jl.setName("vide");
 			break;
 		case 1:
 			jl = new JLabel(ii);
@@ -65,11 +69,26 @@ public class Bloc implements Entite{
 			break;
 		}
 		jl.setBounds(0, 0, 40, 40);
+		this.pa = pa;
+		this.numBloc = numBloc;
 	}
-  		
-  	public void deplacer(int x,int y, int z){
-		jl.setBounds(200+(x*20), 200-((z+1)*20 + 2), 40, 40);	
+	
+	public void vider(int x, int y, int z){
+		pa.remove(jl);
+		this.jl = new JLabel(vide);
+		this.jl.setName("vide");
+		jl.setBounds(200 + (x * 20) - (20 * y), 200 + (x * 10) + (10 * y) - (20 * z), 40, 40);
+		pa.add(jl,numBloc,1);
 	}
+	
+	public void deplacer(int x, int y, int z){
+		this.jl = new JLabel(ii);
+		this.jl.setName("ii");
+		jl.setBounds(200 + (x * 20) - (20 * y), 200 + (x * 10) + (10 * y) - (20 * z), 40, 40);
+		pa.add(jl,numBloc,1);
+	}
+
+    public void deplacer(int x, int y, int z, int numBloc){}
 	
   
   /** Setters and Getters **/
@@ -93,4 +112,9 @@ public class Bloc implements Entite{
 		public void setZ(int z){
 			this.z = z;
 		}
+		
+		
+		public int getNumBloc(){
+      		return this.numBloc;
+      	}
 }

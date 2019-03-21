@@ -14,6 +14,7 @@ public class InterfaceJeu {
 	private JLayeredPane pa;
 	private Deplacement d;
 	JButton btnNext;
+	int indBille = 0;
 	
 	public void nextLevel(){
 		niveau++;
@@ -21,8 +22,14 @@ public class InterfaceJeu {
 		d.efface();
 		pa.removeKeyListener(d);
 		plat.efface();
-		b = new Bille(0, 0, l.getZ(niveau)-1, pa);
 		plat = new Plateau(pa,l,niveau,b);
+		
+		// On a besoin des 4 lignes suivantes pour mettre la bille dans la position de départ
+		indBille = l.getZ(niveau)-1;
+		while (plat.getCellule(0,0,indBille).jl.getName().equals("vide"))
+			indBille--;
+		b = new Bille(0,0,indBille,pa);
+		
 		d = new Deplacement(plat,b,btnNext);
 		pa.addKeyListener(d);
 	}
@@ -32,9 +39,15 @@ public class InterfaceJeu {
 		pa = new JLayeredPane();
 		pa.setPreferredSize(new Dimension(500, 500));
 		pa.setFocusable(true);
-
-		b = new Bille(0, 0, l.getZ(niveau)-1, pa);
+		
+		
 		plat = new Plateau(pa,l,niveau,b);
+		indBille = l.getZ(niveau)-1;
+		while (plat.getCellule(0,0,indBille).jl.getName().equals("vide"))
+			indBille--;
+		b = new Bille(0,0,indBille,pa);
+		
+		
 		d = new Deplacement(plat,b,btnNext);
 		pa.addKeyListener(d);
 		

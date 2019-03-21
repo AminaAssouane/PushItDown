@@ -24,28 +24,29 @@ public class Deplacement implements KeyListener{
 		switch (touche){
 		case KeyEvent.VK_RIGHT :
 			Plateau.Deplacement d = plat.new Deplacement(b, b.getX()+1, b.getY(), b.getZ());
-			boolean o = plat.deplacement(d);
+			boolean o = plat.deplacement(d,"RIGHT");
 			if (o) {
 				this.gagne();
 			}
 			break;
 		case KeyEvent.VK_LEFT :
 		    d = plat.new Deplacement(b, b.getX()-1, b.getY(), b.getZ());
-			o = plat.deplacement(d);
+			o = plat.deplacement(d,"LEFT");
 			if (o) {
 				this.gagne();
 			}
 			break;
 		case KeyEvent.VK_UP :
 			d = plat.new Deplacement(b, b.getX(), b.getY()-1, b.getZ());
-			o = plat.deplacement(d);
+			o = plat.deplacement(d,"UP");
 			if (o) {
 				this.gagne();
 			}
 			break;
 		case KeyEvent.VK_DOWN :
+			//System.out.println(b.getX()); //+ " " + b.getY() + " " + b.getZ());
 			d = plat.new Deplacement(b, b.getX(), b.getY()+1, b.getZ());
-            o = plat.deplacement(d);
+            o = plat.deplacement(d,"DOWN");
             if (o) {
 				this.gagne();
 			}

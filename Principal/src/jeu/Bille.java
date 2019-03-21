@@ -1,33 +1,40 @@
 package jeu;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 
-public class Bille extends Bloc implements Entite{
-	int x,y,z;
-	JLayeredPane f;
-	public Bille(){};
-	public Bille(Byte b){
-		super(b);
-	}
+public class Bille implements Entite{
 	
-	Bille(int x,int y,int z,JLayeredPane f){
-		this.f=f;
+	private int x,y,z;
+	private JLabel jl;
+	private JLayeredPane pa;
+	
+	public Bille(){};
+	
+	public Bille(int x,int y,int z,JLayeredPane pa){
+		this.pa=pa;
 		this.x=x;
 		this.y=y;
 		this.z=z;
 		jl= new JLabel(new ImageIcon("BALL.png"));
 		jl.setBounds(200, 200-((z+1)*20 + 2), 40, 40);
-		f.add(jl,1000,1);
+		pa.add(jl,1000,1);
 	}
 	
 	/* Efface la bille */
 	public void efface(){
-		this.f.remove(jl);
+		this.pa.remove(jl);
+	}
+	
+	public void deplacer(int x,int y,int z,int numBloc){
+		jl.setBounds(200+(x*20)-(y*20), 200 + (x * 10) + (10 * y)-((z+1)*20 + 2), 40, 40);
+		this.pa.add(jl,numBloc,1);	
 	}
 	
 	public void deplacer(int x,int y, int z){
 		jl.setBounds(200+(x*20)-(y*20), 200 + (x * 10) + (10 * y)-((z+1)*20 + 2), 40, 40);
-		f.add(jl,10000,1);	
+		this.pa.add(jl,10000,1);	
 	}
 
   /** Getters and Setters **/

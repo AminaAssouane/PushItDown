@@ -1,9 +1,9 @@
-package jeu;
+/*package jeu;
 
 import java.util.ArrayList;
 
 public class Controleur_Jeu implements Ecouteur_Tour, Ecouteur_DebutPartie  {
-    private Controleur_Tour controleurtour = new Controleur_Tour();
+  /*  private Controleur_Tour controleurtour = new Controleur_Tour();
     private Controleur_DebutPartie debutpartie = new Controleur_DebutPartie();
  
     private Jeu j;
@@ -58,5 +58,5 @@ public class Controleur_Jeu implements Ecouteur_Tour, Ecouteur_DebutPartie  {
 	public void nouvellePartie() {
 		// TODO Auto-generated method stub
 		
-	}
-}
+	}*/
+//}

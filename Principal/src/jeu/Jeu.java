@@ -20,7 +20,7 @@ public class Jeu {
     et le contrôleur, il n y qu'à récupérer cette liste de déplacements 
     dans la classe Jeu avec l'arraylist choixactuel.
     */
-    Ecouteur_Tour EventTour;
+  /*  Ecouteur_Tour EventTour;
     private int nbRetour;
     // Si nombre de retour est négatif, le nombre de retour en arri�re possible est
     // Infini
@@ -54,7 +54,7 @@ public class Jeu {
 	 * - Qui passera par un controleur, qui modifiera la valeur choix
 	 * 
      */
-
+/*
     private int choix;
     private boolean momentdechoisir;
     private ArrayList<Deplacement> choixactuel;
@@ -87,14 +87,14 @@ public class Jeu {
         this.plateau = p;
     }
 
-    public Bille creer_bille_depart(Joueur j, int x, int y, int z) {
+ /*   public Bille creer_bille_depart(Joueur j, int x, int y, int z) {
         if (plateau.getDepart(x, y, z) && !encours) {
             return new Bille(x, y, z);
         } else {
             return null;
         }
-    }
-
+    }*/
+/*
     public Joueur_actuel choisir_profil_temps(String nom, ArrayList<Bille> billes) {
         if (encours) {
             return null;
@@ -113,7 +113,7 @@ public class Jeu {
         return j;
     }
 
-    private void init() {
+   /* private void init() {
         if (encours == false) {
             encours = true;
         }
@@ -123,7 +123,7 @@ public class Jeu {
             tour_suivant();
             init();
         }
-    }
+    }*//*
 
     private void fin() {
         fini.forEach((j) -> {
@@ -131,14 +131,14 @@ public class Jeu {
         });
     }
 
-    private void tour_suivant() {
+  /*  private void tour_suivant() {
         if (participants.size() <= actuel) {
             actuel = 0;
         }
         action(participants.get(actuel));
         actuel++;
-    }
-
+    }*/
+/*
     private void action(Joueur_actuel j) {
         ArrayList<Deplacement> d = new ArrayList<Deplacement>();
         j.billes.forEach((b) -> {
@@ -167,7 +167,7 @@ public class Jeu {
             tour_suivant();
         }
     }
-
+*//*
     private Bille choix_tour(int n, ArrayList<Deplacement> d) {
         if (n == -1) {
             return null;
@@ -181,7 +181,7 @@ public class Jeu {
     }
 
     private Bille choix_action(Deplacement d) {
-        if (plateau.deplacement(d)) {
+        if (plateau.deplacement(d,"")) {
             if (d.getEntite() instanceof Bille) {
                 return (Bille) d.getEntite();
             } else {
@@ -199,7 +199,7 @@ public class Jeu {
         this.choixactuel = choixactuel;
     }
 
-    protected class Joueur_actuel extends Joueur {
+ /*   protected class Joueur_actuel extends Joueur {
 
         private Joueur_actuel(String nom) {
             super(nom);
@@ -245,7 +245,7 @@ public class Jeu {
         private ArrayList<Bille> billes2;
     }
 
-    protected class Bille implements Entite {
+/*    protected class Bille implements Entite {
 
         private ArrayList<Deplacement> deplacements;
         private int x;
@@ -303,5 +303,5 @@ public class Jeu {
 			// TODO Auto-generated method stub
 			
 		}
-    }
+    }*/
 }
