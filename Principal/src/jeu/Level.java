@@ -1,23 +1,29 @@
 package jeu;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class Level {
 	String editedfile,path;
 	savedpath sp;
 	//x = 6; y = 6; z = 6
 	
-    /* Les niveaux sont crées comme suit : */
+    /* Les niveaux sont crÃ©es comme suit : */
     /*
-    1. Les "0x0" correspondent à des bloques vides, les "0x1" à des blocs normaux (marrons), les "0x2" aux blocs 
-    finaux (verts), et les "0x3" aux blocs de début (bleu)
+    1. Les "0x0" correspondent Ã  des bloques vides, les "0x1" Ã  des blocs normaux (marrons), les "0x2" aux blocs 
+    finaux (verts), et les "0x3" aux blocs de dÃ©but (bleu)
 
-    2. Chaque "bloc" est un étage, donc le level 1 qui ne contient qu'un seul "bloc" ne contient qu'un seul étage, 
-    et le niveau 3 contient 6 étages. Ceci correspond à l'axe Z.
+    2. Chaque "bloc" est un Ã©tage, donc le level 1 qui ne contient qu'un seul "bloc" ne contient qu'un seul Ã©tage, 
+    et le niveau 3 contient 6 Ã©tages. Ceci correspond Ã  l'axe Z.
     
-    3. Chaque ligne correspond à une ligne de l'axe X. Donc déplacement avec les touches gauche et droite du clavier.
+    3. Chaque ligne correspond Ã  une ligne de l'axe X. Donc dÃ©placement avec les touches gauche et droite du clavier.
     
-    4. Chaque colonne correspond à une ligne de l'axe Y. Donc déplacement avec les touches haut et bas du clavier.
+    4. Chaque colonne correspond Ã  une ligne de l'axe Y. Donc dÃ©placement avec les touches haut et bas du clavier.
     */
   
-	Byte[] level1 = { 
+	byte[] level1 = { 
 			
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
@@ -61,14 +67,14 @@ public class Level {
 	};
 	
 	Byte[] level3 = { 
-			//1er Ã©tage
+			//1er ÃƒÂ©tage
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x2,
-			//2Ã©me Ã©tage
+			//2ÃƒÂ©me ÃƒÂ©tage
 			0x1,0x1,0x1,0x1,0x1,0x0,
 			0x1,0x1,0x1,0x1,0x1,0x0,
 			0x1,0x1,0x1,0x1,0x1,0x0,
@@ -111,6 +117,7 @@ public class Level {
 			0x0,0x0,0x0,0x0,0x0,0x0,
 			0x0,0x0,0x0,0x0,0x0,0x0
 	};
+
 	
 	Byte[] level4 = { 
 			
@@ -150,7 +157,11 @@ public class Level {
 			
 	};
 	
-	
+
+	byte[] dimensions = {
+			0x6,0x6,0x1
+	};
+
 	boolean solvable;
 	Byte difficulty;
 	Level(){
@@ -227,7 +238,7 @@ public class Level {
 			}
 		}
 	
-	// Fonction qui retourne si oui ou non la case est une case d'arrivée (de sortie)	
+	// Fonction qui retourne si oui ou non la case est une case d'arrivÃ©e (de sortie)	
 		public boolean arrivee(int niv, int numbloc){
 			switch (niv){
 			case 1:
@@ -259,4 +270,23 @@ public class Level {
 					return false;
 			}
 		}
+
+
+
+		void writelvl(String path) throws FileNotFoundException, IOException {
+			FileOutputStream fos = new FileOutputStream(path);
+			fos.write(level1);
+//			fos.write(dimensions);
+			fos.flush();
+			fos.close();
+		}
+		//readlvl("level"+numero)
+		void readlvl(String path) throws IOException {
+			FileInputStream fis = new FileInputStream(path);
+			fis.read(level1);
+//			fis.read(dimensions);
+			fis.close();
+			
+		}
+		
 }
