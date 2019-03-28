@@ -2,12 +2,14 @@ package jeu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class InterfaceJeu {
 	
 	private JFrame f = new JFrame(); 
-	private Level l = new Level();
+	private Level l = new Level(1);
 	private int niveau = 1;
 	private Bille b;
 	private Plateau plat;
@@ -16,7 +18,8 @@ public class InterfaceJeu {
 	JButton btnNext;
 	int indBille = 0;
 	
-	public void nextLevel(){
+	public void nextLevel() throws IOException{
+		l.nextlvl();
 		niveau++;
 		b.efface();
 		d.efface();
@@ -63,7 +66,12 @@ public class InterfaceJeu {
 		btnNext = new JButton("NEXT >");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				nextLevel();
+				try {
+					nextLevel();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				btnNext.setVisible(false);
 			}
 		});

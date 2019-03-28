@@ -160,54 +160,15 @@ public class Level {
 	Byte difficulty;
 	
 	public int getX(int niv){
-		switch (niv){
-		case 1:
-			return 6;
-		case 2:
-			return 6;
-		case 3:
-			return 6;
-		case 4 :
-			return 6;
-		case 5 : 
-			return 6;
-		default : 
-			return 6;
-		}
+		return dimensions[0];
 	}
 	
 	public int getY(int niv){
-		switch (niv){
-		case 1:
-			return 6;
-		case 2:
-			return 6;
-		case 3:
-			return 6;
-		case 4 :
-			return 6;
-		case 5 : 
-			return 6;
-		default : 
-			return 6;
-		}
+		return dimensions[1];
 	}
 
 	public int getZ(int niv){
-		switch (niv){
-		case 1:
-			return 3;
-		case 2:
-			return 2;
-		case 3:
-			return 7;
-		case 4 :
-			return 2;
-		case 5 : 
-			return 2;
-		default : 
-			return 1;
-		}
+		return dimensions[2];
 	}
 	
 	
@@ -266,6 +227,7 @@ public class Level {
 
 		String file,path;
 		savedpath sp;
+		int currentlvl;
 
 		byte[] dimensions = {//X,Y,Z
 				0x6,0x6,0x1
@@ -273,78 +235,90 @@ public class Level {
 		byte level[];
 		void writelvl(String path) throws FileNotFoundException, IOException {
 			FileOutputStream fos = new FileOutputStream(path);
+			fos.write(dimensions);
 			fos.write(level);
 			
-//			fos.write(dimensions);
 			fos.flush();
 			fos.close();
 		}
 		//readlvl("level"+numero)
 		void readlvl(String path) throws IOException {
 			FileInputStream fis = new FileInputStream(path);
-			fis.read(level);
 			fis.read(dimensions);
+			System.out.println("dimensions are X"+dimensions[0]+" Y"+dimensions[1]+" Z"+dimensions[2]);
+			level=new byte[dimensions[0]*dimensions[1]*dimensions[2]];
+			System.out.println("there are "+level.length+"bytes");
+			fis.read(level);
 			fis.close();
-			
 		}
 		
 		
 		Level(){
 			
+//			try {
+//				writelevels();
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}//provisoire
+		}
+		Level(int n) {
 			try {
-				writelevels();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				writelevels();
+				changelvl(n);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}//provisoire
-		}
-		Level(int n) throws IOException{
-			writelevels();//provisoire
-			changelvl(n);
 			
 		}
 
 		void changelvl(int n) throws IOException{
+			currentlvl=n;
 			file="level"+n;
 			readlvl(file);
 		}
+		void nextlvl() throws IOException{
+			currentlvl++;
+			file="level"+currentlvl;
+			readlvl(file);
+		}
 		//en dessous de ce commentaire = a supprimer plus tard, seulement pour sauvegarder les niveaux de ce fichier
-		void writelevels() throws FileNotFoundException, IOException{
-			for(int i=1;i<=5;++i)
-				{
-					writelvlp("level"+i,i);
-					System.out.print("file"+i+" created\n");
-				}
-		}
-		void writelvlp(String path,int i) throws FileNotFoundException, IOException {
-			FileOutputStream fos = new FileOutputStream(path);
-			fos.write(wniveau(i));
-			fos.write(getX(i));
-			fos.write(getY(i));
-			fos.write(getZ(i));
-//			fos.write(dimensions);
-			fos.flush();
-			fos.close();
-		}
-		public byte[] wniveau(int niv){
-			switch (niv){
-			case 1:
-				return level1;
-			case 2:
-				return level2;
-			case 3 :
-				return level3;
-			case 4 :
-				return level4;
-			case 5 :
-				return level5;
-			default :
-				return level1;
-			}
-		}
+//		void writelevels() throws FileNotFoundException, IOException{
+//			for(int i=1;i<=5;++i)
+//				{
+//					writelvlp("level"+i,i);
+//					System.out.print("file"+i+" created\n");
+//				}
+//		}
+//		void writelvlp(String path,int i) throws FileNotFoundException, IOException {
+//			FileOutputStream fos = new FileOutputStream(path);
+//			fos.write(getX(i));
+//			fos.write(getY(i));
+//			fos.write(getZ(i));
+//			fos.write(wniveau(i));
+//			fos.flush();
+//			fos.close();
+//		}
+//		public byte[] wniveau(int niv){
+//			switch (niv){
+//			case 1:
+//				return level1;
+//			case 2:
+//				return level2;
+//			case 3 :
+//				return level3;
+//			case 4 :
+//				return level4;
+//			case 5 :
+//				return level5;
+//			default :
+//				return level1;
+//			}
+//		}
 
 		
 	}
