@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Level {
-	String editedfile,path;
-	savedpath sp;
 	//x = 6; y = 6; z = 6
 	
     /* Les niveaux sont crÃ©es comme suit : */
@@ -48,7 +46,7 @@ public class Level {
 			
 	};
 	
-	Byte[] level2 = { 
+	byte[] level2 = { 
 			
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
@@ -66,7 +64,7 @@ public class Level {
 			
 	};
 	
-	Byte[] level3 = { 
+	byte[] level3 = { 
 			//1er ÃƒÂ©tage
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
@@ -119,7 +117,7 @@ public class Level {
 	};
 
 	
-	Byte[] level4 = { 
+	byte[] level4 = { 
 			
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x1,0x1,0x1,0x1,0x1,0x1,
@@ -139,7 +137,7 @@ public class Level {
 	
 	
 	// Il y a 2 �tages pour l'�ventuel ajout d'un �tage
-	Byte[] level5 = { 
+	byte[] level5 = { 
 			
 			0x3,0x1,0x1,0x1,0x1,0x1,
 			0x0,0x0,0x0,0x0,0x0,0x1,
@@ -158,15 +156,8 @@ public class Level {
 	};
 	
 
-	byte[] dimensions = {
-			0x6,0x6,0x1
-	};
-
 	boolean solvable;
 	Byte difficulty;
-	Level(){
-		
-	}
 	
 	public int getX(int niv){
 		switch (niv){
@@ -271,11 +262,19 @@ public class Level {
 			}
 		}
 
+		//tout ce qui est au dessus de ce commentaire ne sera plus utile en version finale
 
+		String file,path;
+		savedpath sp;
 
+		byte[] dimensions = {//X,Y,Z
+				0x6,0x6,0x1
+		};
+		byte level[];
 		void writelvl(String path) throws FileNotFoundException, IOException {
 			FileOutputStream fos = new FileOutputStream(path);
-			fos.write(level1);
+			fos.write(level);
+			
 //			fos.write(dimensions);
 			fos.flush();
 			fos.close();
@@ -283,10 +282,69 @@ public class Level {
 		//readlvl("level"+numero)
 		void readlvl(String path) throws IOException {
 			FileInputStream fis = new FileInputStream(path);
-			fis.read(level1);
-//			fis.read(dimensions);
+			fis.read(level);
+			fis.read(dimensions);
 			fis.close();
 			
 		}
 		
-}
+		
+		Level(){
+			
+			try {
+				writelevels();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//provisoire
+		}
+		Level(int n) throws IOException{
+			writelevels();//provisoire
+			changelvl(n);
+			
+		}
+
+		void changelvl(int n) throws IOException{
+			file="level"+n;
+			readlvl(file);
+		}
+		//en dessous de ce commentaire = a supprimer plus tard, seulement pour sauvegarder les niveaux de ce fichier
+		void writelevels() throws FileNotFoundException, IOException{
+			for(int i=1;i<=5;++i)
+				{
+					writelvlp("level"+i,i);
+					System.out.print("file"+i+" created\n");
+				}
+		}
+		void writelvlp(String path,int i) throws FileNotFoundException, IOException {
+			FileOutputStream fos = new FileOutputStream(path);
+			fos.write(wniveau(i));
+			fos.write(getX(i));
+			fos.write(getY(i));
+			fos.write(getZ(i));
+//			fos.write(dimensions);
+			fos.flush();
+			fos.close();
+		}
+		public byte[] wniveau(int niv){
+			switch (niv){
+			case 1:
+				return level1;
+			case 2:
+				return level2;
+			case 3 :
+				return level3;
+			case 4 :
+				return level4;
+			case 5 :
+				return level5;
+			default :
+				return level1;
+			}
+		}
+
+		
+	}
