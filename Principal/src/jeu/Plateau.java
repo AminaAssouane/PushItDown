@@ -42,7 +42,7 @@ public class Plateau {
 		plateau[0][0][indBille].setEntite(b);
 	}
     
-    /* Supprime tout le plateau (pour afficher un nouveau plateau quand on passe au niveau supérieur)*/
+    /* Supprime tout le plateau (pour afficher un nouveau plateau quand on passe au niveau supï¿½rieur)*/
     public void efface(){
     	for (int k = 0; k < this.z; k++){
 			for (int j = 0; j < this.y; j++){
@@ -61,8 +61,8 @@ public class Plateau {
         return (x < plateau.length && x > -1 && y < plateau[x].length && y > -1 && z < plateau[x][y].length && z > -1);
     }
     
-    // retourne une hauteur possible pour un déplacement, plus basse que la
-    // coordonnée z fournie en paramètre
+    // retourne une hauteur possible pour un dÃ©placement, plus basse que la
+    // coordonnÃ©e z fournie en paramÃ¨tre
     private int test_hauteur(int x, int y, int z) {
     	if (dansletableau(x,y,z)){
     		while (this.plateau[x][y][z].jl.getName().equals("vide") && z > 0){
@@ -81,12 +81,12 @@ public class Plateau {
     	else return -1;
     }
     
-    /* Test si la case est la case d'arrivée */
+    /* Test si la case est la case d'arrivÃ©e */
     protected boolean test_final(Entite j) {
         return (plateau[j.getX()][j.getY()][j.getZ()].arrivee);
     }
     
-    /* Supprime la bille j du champ entité de la case du plateau */
+    /* Supprime la bille j du champ entitÃ© de la case du plateau */
     protected boolean supprimer_entite(Entite j) {
         if (j == null) {
             return false;
@@ -96,16 +96,16 @@ public class Plateau {
                 return false;
             }
         }
-        /* On retire pour cela les coordonnées de l'entité j */
+        /* On retire pour cela les coordonnÃ©es de l'entitÃ© j */
         plateau[j.getX()][j.getY()][j.getZ()].entite = null;
         return true;
     }
     
     /* Fonction de deplacement bloc */
     protected boolean deplacementBloc(Deplacement d, String direction){
-    	boolean boolHauteur = false; // Booleen qui sert a gérer le cas ou le bloc tombe
+    	boolean boolHauteur = false; // Booleen qui sert a gï¿½rer le cas ou le bloc tombe
     	int oldZ2 = d.z2; // l'ancienne position du bloc, avant qu'il ne tombe
-    	/* S'il y a 2 ou plus blocs superposés, on retourne faux : impossible de bouger dans cette direction */
+    	/* S'il y a 2 ou plus blocs superposï¿½s, on retourne faux : impossible de bouger dans cette direction */
     	if (dansletableau(d.x2, d.y2, d.z2 + 2) && ((plateau[d.x2][d.y2][d.z2 + 2] != null) && (!plateau[d.x2][d.y2][d.z2 + 2].jl.getName().equals("vide"))))
         	return false;
     	
@@ -244,7 +244,7 @@ public class Plateau {
         return false;
     }
 
-    /* Fonction qui vérifie s'il y a une bille dans la case (x,y,z) */
+    /* Fonction qui vÃ©rifie s'il y a une bille dans la case (x,y,z) */
     private boolean occupe(int x, int y, int z) {
         return (dansletableau(x, y, z) && plateau[x][y][z].entite != null);
     }
