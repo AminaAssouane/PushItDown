@@ -220,7 +220,7 @@ public class Plateau {
     	}       
     }
     
-    /*
+    
     protected Deplacement_mem deplacement(Deplacement_mem d){
         if (d== null) 
             return null;
@@ -319,7 +319,7 @@ public class Plateau {
         return false;
     }
     
-    
+    // pour bloc uniquement.
     private int test_hauteur2(int x, int y, int z) {
     	if (dansletableau(x,y,z)){
             int aux = z;
@@ -340,11 +340,10 @@ public class Plateau {
         else {
             return -1;
         }
-    }    
-    */
+    }        
     
     
-    /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
+    s/* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
     protected boolean deplacement(Deplacement_mem d, String direction) {
         if (d == null) 
             return false;
