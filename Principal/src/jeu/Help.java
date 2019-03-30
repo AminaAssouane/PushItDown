@@ -33,15 +33,15 @@ public class Help {
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
 		
-		JLabel lblUtilisezLesFlches = new JLabel("\u2022  Utilisez les fl\u00E8ches du clavier (\u2191,\u2193,\u2190,\u2192) pour vous d\u00E9placer.\r\n\r\n");
+		JLabel lblUtilisezLesFlches = new JLabel(" Utilisez les flèches du clavier (_,_,_,_) pour vous déplacer.\r\n\r\n");
 		lblUtilisezLesFlches.setBounds(68, 168, 406, 54);
 		frame.getContentPane().add(lblUtilisezLesFlches);
 		
-		JLabel lblNewLabel = new JLabel("\u2022  Le d\u00E9placement n'est autoris\u00E9 que s'il n'y a aucun obstacle dans");
+		JLabel lblNewLabel = new JLabel("Le déplacement n'est autorisé que s'il n'y a aucun obstacle dans");
 		lblNewLabel.setBounds(68, 217, 471, 76);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("\u2022 Vous gagnez la partie lorsque vous arrivez \u00E0 la case verte.");
+		JLabel lblNewLabel_1 = new JLabel("Vous gagnez la partie lorsque vous arrivez à la case verte.");
 		lblNewLabel_1.setBounds(68, 309, 408, 45);
 		frame.getContentPane().add(lblNewLabel_1);
 		

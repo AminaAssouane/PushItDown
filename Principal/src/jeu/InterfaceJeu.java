@@ -27,7 +27,7 @@ public class InterfaceJeu {
 		plat.efface();
 		plat = new Plateau(pa,l,niveau,b);
 		
-		// On a besoin des 4 lignes suivantes pour mettre la bille dans la position de départ
+		// On a besoin des 4 lignes suivantes pour mettre la bille dans la position de dÃ©part
 		indBille = l.getZ(niveau)-1;
 		while (plat.getCellule(0,0,indBille).jl.getName().equals("vide"))
 			indBille--;

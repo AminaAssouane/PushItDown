@@ -12,7 +12,7 @@ public class Bloc implements Entite{
 	
 	protected JLabel jl;
 	protected JLayeredPane pa;
-	protected int numBloc; // entier qui sert à superposer les composants ((numBloc1 > numBloc2) -> le bloc de numBloc1 est devant celui de numBloc2 
+	protected int numBloc; // entier qui sert Ã  superposer les composants ((numBloc1 > numBloc2) -> le bloc de numBloc1 est devant celui de numBloc2 
     private int x,y,z;
 	static ImageIcon vide = new ImageIcon("CUBE0.png");
 	static ImageIcon ii = new ImageIcon("CUBE.png");
