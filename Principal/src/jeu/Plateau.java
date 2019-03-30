@@ -11,7 +11,9 @@ public class Plateau {
     int x,y,z,niv;
     private JLayeredPane pa;
     private Level l;
-  
+    private boolean editeur = false;
+    
+
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b){
     	this.niv = niv;
     	this.l = l;
@@ -42,7 +44,7 @@ public class Plateau {
 		plateau[0][0][indBille].setEntite(b);
 	}
     
-    /* Supprime tout le plateau (pour afficher un nouveau plateau quand on passe au niveau sup�rieur)*/
+    /* Supprime tout le plateau (pour afficher un nouveau plateau quand on passe au niveau supérieur)*/
     public void efface(){
     	for (int k = 0; k < this.z; k++){
 			for (int j = 0; j < this.y; j++){
@@ -102,7 +104,7 @@ public class Plateau {
     }
     
     /* Fonction de deplacement bloc */
-    protected boolean deplacementBloc(Deplacement d, String direction){
+    protected boolean deplacementBloc(Deplacement_mem d, String direction){
     	boolean boolHauteur = false; // Booleen qui sert a g�rer le cas ou le bloc tombe
     	int oldZ2 = d.z2; // l'ancienne position du bloc, avant qu'il ne tombe
     	/* S'il y a 2 ou plus blocs superpos�s, on retourne faux : impossible de bouger dans cette direction */
@@ -218,8 +220,132 @@ public class Plateau {
     	}       
     }
     
+    /*
+    protected Deplacement_mem deplacement(Deplacement_mem d){
+        if (d== null) 
+            return null;
+        
+        int dir = direction(d);
+        if (dir==10) return null;
+        // CAS DEPLACEMENT SPECIAL A TRAITER PLUS TARD
+        
+        if (estVide(d)) {
+            if(plateau[d.x1][d.y1][d.z1].entite instanceof Cellule){
+                return null;
+            }
+            deplacement_effectif(d);
+            return d;
+        } 
+        
+        else {
+            if (bougeBloc(d)!= -1){
+                
+            }
+        }
+        
+        return null;
+    }
+    
+    private void deplacement_effectif(Deplacement_mem d){
+        this.plateau[d.x1][d.y1][d.z1].entite = null;
+        this.plateau[d.x2][d.y2][d.z2].entite = d.entite;
+    }
+    
+    private void deplacement_effectif_bloc(Deplacement_mem d){
+        this.plateau[d.x1][d.y1][d.z1].entite=null;
+        this.plateau[d.x2][d.y2][d.z2].entite = d.entite;
+        this.plateau[d.x2][d.y2][d.z2+1] = (Cellule)d.entite;
+    }
+    
+    private int direction(Deplacement_mem d){
+        // UTILISATION
+        
+        // RETURN 1 == HAUT
+        // RETURN 2 == BAS
+        // RETURN 3 == DROITE
+        // RETURN 4 == GAUCHE
+        // RETURN 10 == DIRECTION SPECIALE
+        // RETURN 0 == IMMOBILE
+        
+        if (d.x1 == d.x2 && d.y1 == d.y2){
+            return 0;
+        }
+        
+        if (d.x1 == d.x2){
+            if (d.y1-d.y2==-1){
+                return  1;
+            }
+            
+            if (d.y1 - d.y2 == 1){
+            return 2;      
+            }
+            
+            else {
+                return 10;
+            }
+        }
+        
+        if (d.y1 == d.y2){
+            if (d.x1-d.x2==-1){
+                return  3;
+            }
+            
+            if (d.x1 - d.x2 == 1){
+            return 4;   
+            }
+            
+            else {
+                return 10;
+            }
+        }
+        
+        return 10;
+    }
+    
+    protected int bougeBloc(Deplacement_mem d){
+        if (plateau[d.x2][d.y2][d.z2].entite == null){
+            // Il y a une entite derriere le bloc
+            return -1;
+        }
+        
+        return test_hauteur2(d.x2,d.y2,d.z2);
+    }
+    
+    protected boolean estVide(Deplacement_mem d){
+        if (plateau[d.x2][d.y2][d.z2].entite == null
+                && (plateau[d.x2][d.y2][d.z2+1] != null)){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    private int test_hauteur2(int x, int y, int z) {
+    	if (dansletableau(x,y,z)){
+            int aux = z;
+    		while (this.plateau[x][y][aux] == null && aux > 0){
+    			aux--;
+    		}
+    		
+                if (aux == 0){
+                    return 0;
+                }
+                
+                if (plateau[x][y][aux].entite != null){
+                    return -1;
+                }
+                
+                return aux;
+        } 
+        else {
+            return -1;
+        }
+    }    
+    */
+    
+    
     /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
-    protected boolean deplacement(Deplacement d, String direction) {
+    protected boolean deplacement(Deplacement_mem d, String direction) {
         if (d == null) 
             return false;
             
@@ -323,9 +449,15 @@ public class Plateau {
         	this.entite = e;
         }
       
+        
+        
+        
+        
+        
+        
     }
 
-    protected class Deplacement {
+    protected class Deplacement_mem {
 
         private int x1;
         private int x2;
@@ -335,7 +467,7 @@ public class Plateau {
         private int z2;
         private Entite entite;
 
-        public Deplacement(Entite entite, int x1, int x2, int y1, int y2, int z1, int z2) {
+        public Deplacement_mem(Entite entite, int x1, int x2, int y1, int y2, int z1, int z2) {
             this.x1 = x1;
             this.x2 = x2;
             this.y1 = y1;
@@ -345,7 +477,7 @@ public class Plateau {
             this.entite = entite;
         }
 
-        public Deplacement(Entite entite, int x, int y, int z) {
+        public Deplacement_mem(Entite entite, int x, int y, int z) {
             x1 = entite.getX();
             y1 = entite.getY();
             z1 = entite.getZ();
@@ -355,8 +487,8 @@ public class Plateau {
             this.entite = entite;
         }
 
-        public Deplacement inverse() {
-            return new Deplacement(entite, x2, x1, y2, y1, z2, z1);
+        public Deplacement_mem inverse() {
+            return new Deplacement_mem(entite, x2, x1, y2, y1, z2, z1);
         }
 
         public Entite getEntite() {
@@ -374,6 +506,23 @@ public class Plateau {
     public JLayeredPane getPanel(){ return this.pa; }
     public Cellule getCellule(int x, int y, int z){
     	return plateau[x][y][z];
+    }
+   
+    //* CODE POUR LA CREATION DE PLATEAU, EDITEUR GRAPHIQUE
+    
+    /*
+        Test s'il y a une cellule en dessous
+        puis essaye d'ajouter l'entité si oui
+        Uniquement si la cellule d'en dessous est vide !
+ */ 
+    
+    
+    protected boolean ajouterEntite(Entite j, int x, int y, int z) {
+        if (dansletableau(x, y, z) && plateau[x][y][z] != null && plateau[x][y][z].entite == null) {
+            plateau[x][y][z].entite = j;
+            return true;
+        }
+        return false;
     }
     
    // public void setCellule(int x, int y, int z)
@@ -484,18 +633,7 @@ if (dansletableau(x, y, z) && plateau[x][y][z] == null) {
 return false;
 }
 
-protected boolean ajouterEntite(Entite j, int x, int y, int z) {
-/*
-        Test s'il y a une cellule en dessous
-        puis essaye d'ajouter l'entité si oui
-        Uniquement si la cellule d'en dessous est vide !
- */
-/*  if (dansletableau(x, y, z) && plateau[x][y][z] != null && plateau[x][y][z].entite == null) {
-    plateau[x][y][z].entite = j;
-    return true;
-}
-return false;
-}*/
+
 
 
 /*   private boolean add(Deplacement d, ArrayList<Deplacement> a) {

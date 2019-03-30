@@ -1,7 +1,7 @@
 package jeu;
 
 import java.util.ArrayList;
-import jeu.Plateau.Deplacement;
+import jeu.Plateau.Deplacement_mem;
 
 //MODELE DU JEU
 public class Jeu {

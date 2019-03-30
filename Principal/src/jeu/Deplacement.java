@@ -23,21 +23,21 @@ public class Deplacement implements KeyListener{
 		int touche = e.getKeyCode();
 		switch (touche){
 		case KeyEvent.VK_RIGHT :
-			Plateau.Deplacement d = plat.new Deplacement(b, b.getX()+1, b.getY(), b.getZ());
+			Plateau.Deplacement_mem d = plat.new Deplacement_mem(b, b.getX()+1, b.getY(), b.getZ());
 			boolean o = plat.deplacement(d,"RIGHT");
 			if (o) {
 				this.gagne();
 			}
 			break;
 		case KeyEvent.VK_LEFT :
-		    d = plat.new Deplacement(b, b.getX()-1, b.getY(), b.getZ());
+		    d = plat.new Deplacement_mem(b, b.getX()-1, b.getY(), b.getZ());
 			o = plat.deplacement(d,"LEFT");
 			if (o) {
 				this.gagne();
 			}
 			break;
 		case KeyEvent.VK_UP :
-			d = plat.new Deplacement(b, b.getX(), b.getY()-1, b.getZ());
+			d = plat.new Deplacement_mem(b, b.getX(), b.getY()-1, b.getZ());
 			o = plat.deplacement(d,"UP");
 			if (o) {
 				this.gagne();
@@ -45,7 +45,7 @@ public class Deplacement implements KeyListener{
 			break;
 		case KeyEvent.VK_DOWN :
 			//System.out.println(b.getX()); //+ " " + b.getY() + " " + b.getZ());
-			d = plat.new Deplacement(b, b.getX(), b.getY()+1, b.getZ());
+			d = plat.new Deplacement_mem(b, b.getX(), b.getY()+1, b.getZ());
             o = plat.deplacement(d,"DOWN");
             if (o) {
 				this.gagne();
