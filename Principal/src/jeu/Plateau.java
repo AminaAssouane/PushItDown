@@ -131,7 +131,7 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 + 1][d.y2][d.z2 + 1].deplacer(d.x2 + 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2 + 1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2 + 1, d.y2, d.z2 + 1);
                         actuel.addCoup(mem.inverse());
 
                         /* deplacement de la bille */
@@ -160,7 +160,7 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 - 1][d.y2][d.z2 + 1].deplacer(d.x2 - 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2-1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2-1, d.y2, d.z2 + 1);
                         actuel.addCoup(mem.inverse());
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
@@ -218,7 +218,7 @@ public class Plateau {
                         plateau[d.x2][d.y2 + 1][d.z2 + 1].deplacer(d.x2, d.y2 + 1, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
                         Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 + 1][d.z2 + 1],
-                                d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                                d.x2, d.y2, d.z2, d.x2, d.y2 +1, d.z2 + 1);
                         actuel.addCoup(mem.inverse());
 
                         /* deplacement de la bille */
