@@ -71,8 +71,16 @@ public class Joueur {
 		this.lvlMaxAtteint = lvl;
 	}
 	
-	public int getlvlMaxAtteint() {
+	public int getLvlMaxAtteint() {
 		return this.lvlMaxAtteint;
+	}
+	
+	public void setListCoups(LinkedList<Plateau.Deplacement_mem> list) {
+		this.listCoups = list;
+	}
+	
+	public LinkedList<Plateau.Deplacement_mem> getListCoups() {
+		return this.listCoups;
 	}
 
 }
