@@ -21,29 +21,29 @@ public class Joueur {
 		this.avatar = null;
 	}
 	
-	// Ajoute un deplacement à la liste de coups 
+	// Ajoute un deplacement ï¿½ la liste de coups 
 	public void addCoup(Plateau.Deplacement_mem dep){
 		this.listCoups.addLast(dep);
 	}
 	
-	// Renvoie (mais NE RETIRE PAS) le dernier coup effectué par le joueur
+	// Renvoie (mais NE RETIRE PAS) le dernier coup effectuï¿½ par le joueur
 	public Plateau.Deplacement_mem getLastCoup(){
 		return listCoups.peekLast();
 	}
 	
-	// Renvoie (ET RETIRE) le dernier coup effectué par le joueur
+	// Renvoie (ET RETIRE) le dernier coup effectuï¿½ par le joueur
 	public Plateau.Deplacement_mem undoLastCoup(){
 		return listCoups.pollLast();
 	}	
 	
-	// A ajouter : 1. retirer le niveau ou on est arrivé de la classe "Jeu" ou "Plateau"
+	// A ajouter : 1. retirer le niveau ou on est arrivï¿½ de la classe "Jeu" ou "Plateau"
 	// 2. Sauvegarde dans un fichier avec jflex
 	public void sauvegarde(){
 		if (this.score > this.bestScore)
 			this.bestScore = this.score;	
 	}
 	
-	// Possibilité d'ajouter un avatar
+	// Possibilitï¿½ d'ajouter un avatar
 	public void addAvatar(String photo){
 		this.avatar = new ImageIcon(photo);
 	}
@@ -82,5 +82,9 @@ public class Joueur {
 	public LinkedList<Plateau.Deplacement_mem> getListCoups() {
 		return this.listCoups;
 	}
+        
+        public LinkedList<Plateau.Deplacement_mem> getList(){
+            return this.listCoups;
+        }
 
 }
