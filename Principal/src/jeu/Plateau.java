@@ -12,9 +12,6 @@ public class Plateau {
     private Level l;
     private boolean editeur = false;
     Joueur actuel;
-    
-    
-
 
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b) {
         this.niv = niv;
@@ -134,6 +131,8 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 + 1][d.y2][d.z2 + 1].deplacer(d.x2 + 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        actuel.addCoup(mem.inverse());
 
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
@@ -141,6 +140,7 @@ public class Plateau {
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
                 }
@@ -160,13 +160,15 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 - 1][d.y2][d.z2 + 1].deplacer(d.x2 - 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        actuel.addCoup(mem.inverse());
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
                 }
@@ -187,12 +189,15 @@ public class Plateau {
                         plateau[d.x2][d.y2 - 1][d.z2 + 1].deplacer(d.x2, d.y2 - 1, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
 
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        actuel.addCoup(mem.inverse());
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
                 }
@@ -212,6 +217,9 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2][d.y2 + 1][d.z2 + 1].deplacer(d.x2, d.y2 + 1, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
+                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 + 1][d.z2 + 1],
+                                d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+                        actuel.addCoup(mem.inverse());
 
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
@@ -219,6 +227,7 @@ public class Plateau {
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
                 }
@@ -350,17 +359,6 @@ public class Plateau {
         }
     }    
      */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
  /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
     protected boolean deplacement(Deplacement_mem d, String direction) {
         if (d == null) {
@@ -377,6 +375,7 @@ public class Plateau {
 
         if ((d.z2 != -1) && dansletableau(d.x2, d.y2, d.z2) && !occupe(d.x2, d.y2, d.z2)) {
             if (supprimer_entite(d.entite)) {
+                actuel.addCoup(d);
                 plateau[d.x2][d.y2][d.z2].entite = d.entite;
                 d.entite.deplacer(d.x2, d.y2, d.z2, plateau[d.x2][d.y2][d.z2 + 1].numBloc);
                 d.entite.setX(d.x2);
@@ -397,22 +396,21 @@ public class Plateau {
         return occupe(dpm.x2, dpm.y2, dpm.z2);
     }
 
-    
-    
-        public boolean retour(int n) {
+    public boolean retour(int n) {
         return coup_arriere(n);
     }
 
     private boolean coup_arriere(int n) {
-        if (n >= actuel.getList().size()){
+        if (n >= actuel.getList().size()) {
             return false;
         }
         for (int i = 0; i < n; i++) {
-            Deplacement_mem dm = actuel.getList().get(actuel.getList().size()-1-i);
-            if (!deplacementr(dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2))
+            Deplacement_mem dm = actuel.getList().get(actuel.getList().size() - 1 - i);
+            if (!deplacementr(dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2)) {
                 return false;
+            }
         }
-        
+
         return true;
     }
 
@@ -433,7 +431,7 @@ public class Plateau {
             if (!dansletableau(x, y, z + 1) || plateau[x][y][z + 1] != null) {
                 return false;
             }
-            plateau[x0][y0][z0+1]=null;
+            plateau[x0][y0][z0 + 1] = null;
             plateau[x][y][z + 1] = (Cellule) e;
         }
         plateau[x0][y0][z0].entite = null;
@@ -446,11 +444,7 @@ public class Plateau {
     private void clear() {
         actuel.getList().clear();
     }
-    
-    
-    
-    
-    
+
     protected class Cellule extends Bloc implements Entite {
 
         private int x;
@@ -677,7 +671,7 @@ private boolean testbool(boolean a, boolean b, boolean c, boolean d) {
 }
  */
 
-/*    protected boolean getDepart(int x, int y, int z) {
+ /*    protected boolean getDepart(int x, int y, int z) {
 return cellule_departs.stream().anyMatch((c) -> (c.z == z && c.x == x && c.y == y));
 }
 
