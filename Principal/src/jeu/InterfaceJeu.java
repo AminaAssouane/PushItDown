@@ -66,7 +66,7 @@ public class InterfaceJeu {
 		btnRetour = new JButton("RETOUR >");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				plat.retour(1);
+				plat.test();
 			}
 		});
 		btnRetour.setBounds(332, 70, 100, 23);

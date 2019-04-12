@@ -1,5 +1,6 @@
 package jeu;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import javax.swing.JLayeredPane;
 
@@ -14,6 +15,7 @@ public class Plateau {
     Joueur actuel;
 
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b) {
+        this.actuel = new Joueur ("Test");
         this.niv = niv;
         this.l = l;
         this.x = l.getX(niv);
@@ -105,6 +107,7 @@ public class Plateau {
 
     /* Fonction de deplacement bloc */
     protected boolean deplacementBloc(Deplacement_mem d, String direction) {
+        System.out.println("Debug : DeplacementBloc");
         boolean boolHauteur = false; // Booleen qui sert a g�rer le cas ou le bloc tombe
         int oldZ2 = d.z2; // l'ancienne position du bloc, avant qu'il ne tombe
         /* S'il y a 2 ou plus blocs superpos�s, on retourne faux : impossible de bouger dans cette direction */
@@ -131,8 +134,8 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 + 1][d.y2][d.z2 + 1].deplacer(d.x2 + 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2 + 1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2 + 1, d.y2, d.z2 + 1);
-                        actuel.addCoup(mem.inverse());
+//                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2 + 1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2 + 1, d.y2, d.z2 + 1);
+//                        actuel.addCoup(mem.inverse());
 
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
@@ -140,7 +143,9 @@ public class Plateau {
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        
                         actuel.addCoup(d.inverse());
+                        
                         return test_final(d.entite);
                     }
                 }
@@ -160,8 +165,8 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2 - 1][d.y2][d.z2 + 1].deplacer(d.x2 - 1, d.y2, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2-1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2-1, d.y2, d.z2 + 1);
-                        actuel.addCoup(mem.inverse());
+//                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2-1][d.y2][d.z2 + 1], d.x2, d.y2, d.z2, d.x2-1, d.y2, d.z2 + 1);
+//                        actuel.addCoup(mem.inverse());
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
@@ -189,8 +194,8 @@ public class Plateau {
                         plateau[d.x2][d.y2 - 1][d.z2 + 1].deplacer(d.x2, d.y2 - 1, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
 
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
-                        actuel.addCoup(mem.inverse());
+//                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 - 1][d.z2 + 1], d.x2, d.y2, d.z2, d.x2, d.y2 - 1, d.z2 + 1);
+//                        actuel.addCoup(mem.inverse());
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
@@ -217,9 +222,10 @@ public class Plateau {
                         /* deplacement du bloc */
                         plateau[d.x2][d.y2 + 1][d.z2 + 1].deplacer(d.x2, d.y2 + 1, d.z2 + 1);
                         plateau[d.x2][d.y2][oldZ2 + 1].vider(d.x2, d.y2, oldZ2);
-                        Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 + 1][d.z2 + 1],
+                        /*Deplacement_mem mem = new Deplacement_mem(plateau[d.x2][d.y2 + 1][d.z2 + 1],
                                 d.x2, d.y2, d.z2, d.x2, d.y2 +1, d.z2 + 1);
                         actuel.addCoup(mem.inverse());
+                        */
 
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
@@ -360,7 +366,13 @@ public class Plateau {
     }    
      */
  /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
+    
+    public static void test(){
+        return;
+    }
+    
     protected boolean deplacement(Deplacement_mem d, String direction) {
+        System.out.println("Debug : Deplacement normal");
         if (d == null) {
             return false;
         }
@@ -370,12 +382,14 @@ public class Plateau {
             return deplacementBloc(d, direction);
         }
 
+        System.out.println("Je commmence ici en " + d.x1 + " " + d.y1 + " " + d.z1);
+        
         /* Quand la boule tombe : on change d.z2 */
         d.setZ2(test_hauteur(d.x2, d.y2, d.z2));
 
         if ((d.z2 != -1) && dansletableau(d.x2, d.y2, d.z2) && !occupe(d.x2, d.y2, d.z2)) {
             if (supprimer_entite(d.entite)) {
-                actuel.addCoup(d);
+                actuel.addCoup(d.inverse());
                 plateau[d.x2][d.y2][d.z2].entite = d.entite;
                 d.entite.deplacer(d.x2, d.y2, d.z2, plateau[d.x2][d.y2][d.z2 + 1].numBloc);
                 d.entite.setX(d.x2);
@@ -384,6 +398,7 @@ public class Plateau {
                 return test_final(d.entite);
             }
         }
+        
         return false;
     }
 
@@ -401,42 +416,45 @@ public class Plateau {
     }
 
     private boolean coup_arriere(int n) {
-        if (n >= actuel.getList().size()) {
+        if (n > actuel.getList().size()) {
             return false;
         }
         for (int i = 0; i < n; i++) {
             Deplacement_mem dm = actuel.getList().get(actuel.getList().size() - 1 - i);
-            if (!deplacementr(dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2)) {
+            if (!deplacementr(dm, dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2)) {
                 return false;
             }
+            actuel.getList().remove(actuel.getList().size()-1);
         }
-
         return true;
     }
 
-    private boolean deplacementr(int x0, int y0, int z0, int x, int y, int z) {
-
+    private boolean deplacementr(Deplacement_mem m, int x0, int y0, int z0, int x, int y, int z) {
+        System.out.println("Ma position actuelle est " + x0 + " " + y0 + " " + z0);
         if (!dansletableau(x0, y0, z0) || !dansletableau(x, y, z)
                 || occupe(x, y, z)) {
+            System.out.println(x0+  "_" + y0 + "_" + z0 );
+            System.out.println(x+  "_" + y + "_" + z );
+            System.out.println(!dansletableau(x,y,z));
+            
+            
             // coordonnées pas dans le tableau OU case d'arrivée occupée
+            System.out.println("Erreur 1");
             return false;
         }
 
         Entite e = plateau[x0][y0][z0].entite;
-
-        if (e instanceof Cellule) {
-            if (((Cellule) e).entite != null) {
-                return false;
-            }
-            if (!dansletableau(x, y, z + 1) || plateau[x][y][z + 1] != null) {
-                return false;
-            }
-            plateau[x0][y0][z0 + 1] = null;
-            plateau[x][y][z + 1] = (Cellule) e;
-        }
+        System.out.println("Réussite de l'annulation du coup !");
         plateau[x0][y0][z0].entite = null;
         //suppression entitée case d'origine
         plateau[x][y][z].entite = e;
+        System.out.println("J'ai annulé mon coup "
+                + "donc je retrouve ici en " + x + " " + y + " " + z);
+        
+        m.entite.deplacer(m.x2, m.y2, m.z2, plateau[m.x2][m.y2][m.z2 + 1].numBloc);
+        m.entite.setX(m.x2);
+        m.entite.setY(m.y2);
+        m.entite.setZ(m.z2);
         //ajout case d'arrivée
         return true;
     }
