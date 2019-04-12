@@ -15,7 +15,7 @@ public class InterfaceJeu {
 	private Plateau plat;
 	private JLayeredPane pa;
 	private Deplacement d;
-	JButton btnNext;
+	JButton btnNext, btnRetour;
 	int indBille = 0;
 	
 	public void nextLevel() throws IOException{
@@ -62,6 +62,15 @@ public class InterfaceJeu {
 		JLabel lblScore = new JLabel("Score :");
 		lblScore.setBounds(348, 45, 46, 14);
 		pa.add(lblScore);
+		
+		btnRetour = new JButton("RETOUR >");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				plat.retour(1);
+			}
+		});
+		btnRetour.setBounds(332, 70, 100, 23);
+		pa.add(btnRetour);
 		
 		btnNext = new JButton("NEXT >");
 		btnNext.addActionListener(new ActionListener() {
