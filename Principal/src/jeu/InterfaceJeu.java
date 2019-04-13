@@ -49,8 +49,7 @@ public class InterfaceJeu {
 		while (plat.getCellule(0,0,indBille).jl.getName().equals("vide"))
 			indBille--;
 		b = new Bille(0,0,indBille,pa);
-		
-		
+
 		d = new Deplacement(plat,b,btnNext);
 		pa.addKeyListener(d);
 		
@@ -66,11 +65,13 @@ public class InterfaceJeu {
 		btnRetour = new JButton("RETOUR >");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				plat.test();
+				plat.retour(1);
+				pa.requestFocus();
 			}
-		});
+		});	
 		btnRetour.setBounds(332, 70, 100, 23);
 		pa.add(btnRetour);
+		
 		
 		btnNext = new JButton("NEXT >");
 		btnNext.addActionListener(new ActionListener() {
