@@ -29,6 +29,17 @@ public class Accueil {
 
 		Controleur_DebutPartie cd = new Controleur_DebutPartie();
 		
+                JButton btnEditeur = new JButton ("Editeur de carte");
+                
+                btnEditeur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+               
+                btnEditeur.setBounds(170,400,132,23);
+                frame.getContentPane().add(btnEditeur);
+                
 		JButton btnNewButton = new JButton("Nouveau joueur");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

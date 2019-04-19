@@ -31,7 +31,7 @@ public class Plateau {
             for (int j = 0; j < y; j++) {
                 for (int i = 0; i < x; i++) {
                     plateau[i][j][k] = new Cellule(i, j, k, l.niveau(niv, numbloc), l.arrivee(niv, numbloc), numbloc, pa);
-                    plateau[i][j][k].jl.setBounds(middle + (20 * i) - (20 * j), down + (i * 10) + (10 * j) - (20 * k), 40, 40);
+                    plateau[i][j][k].jl.setBounds(middle+(20 * i) - (20 * j), down+(i * 10) + (10 * j) - (20 * k), 40, 40);
                     numbloc++;
                     pa.add(plateau[i][j][k].jl, numbloc, 1);
                 }
@@ -46,6 +46,10 @@ public class Plateau {
         plateau[0][0][indBille].setEntite(b);
     }
 
+    public Cellule[][][] getPlateau(){
+        return this.plateau;
+    }
+    
     /* Supprime tout le plateau (pour afficher un nouveau plateau quand on passe au niveau supérieur)*/
     public void efface() {
         for (int k = 0; k < this.z; k++) {
@@ -87,6 +91,7 @@ public class Plateau {
 
     /* Test si la case est la case d'arrivée */
     protected boolean test_final(Entite j) {
+        InterfaceJeu.actualiservue();
         return (plateau[j.getX()][j.getY()][j.getZ()].arrivee);
     }
 
@@ -145,7 +150,6 @@ public class Plateau {
                         d.entite.setZ(oldZ2);
                         
                         actuel.addCoup(d.inverse());
-                        
                         return test_final(d.entite);
                     }
                 }
@@ -243,128 +247,7 @@ public class Plateau {
         }
     }
 
-    /*
-    protected Deplacement_mem deplacement(Deplacement_mem d){
-        if (d== null) 
-            return null;
-        
-        int dir = direction(d);
-        if (dir==10) return null;
-        // CAS DEPLACEMENT SPECIAL A TRAITER PLUS TARD
-        
-        if (estVide(d)) {
-            if(plateau[d.x1][d.y1][d.z1].entite instanceof Cellule){
-                return null;
-            }
-            deplacement_effectif(d);
-            return d;
-        } 
-        
-        else {
-            if (bougeBloc(d)!= -1){
-                
-            }
-        }
-        
-        return null;
-    }
-    
-    private void deplacement_effectif(Deplacement_mem d){
-        this.plateau[d.x1][d.y1][d.z1].entite = null;
-        this.plateau[d.x2][d.y2][d.z2].entite = d.entite;
-    }
-    
-    private void deplacement_effectif_bloc(Deplacement_mem d){
-        this.plateau[d.x1][d.y1][d.z1].entite=null;
-        this.plateau[d.x2][d.y2][d.z2].entite = d.entite;
-        this.plateau[d.x2][d.y2][d.z2+1] = (Cellule)d.entite;
-    }
-    
-    private int direction(Deplacement_mem d){
-        // UTILISATION
-        
-        // RETURN 1 == HAUT
-        // RETURN 2 == BAS
-        // RETURN 3 == DROITE
-        // RETURN 4 == GAUCHE
-        // RETURN 10 == DIRECTION SPECIALE
-        // RETURN 0 == IMMOBILE
-        
-        if (d.x1 == d.x2 && d.y1 == d.y2){
-            return 0;
-        }
-        
-        if (d.x1 == d.x2){
-            if (d.y1-d.y2==-1){
-                return  1;
-            }
-            
-            if (d.y1 - d.y2 == 1){
-            return 2;      
-            }
-            
-            else {
-                return 10;
-            }
-        }
-        
-        if (d.y1 == d.y2){
-            if (d.x1-d.x2==-1){
-                return  3;
-            }
-            
-            if (d.x1 - d.x2 == 1){
-            return 4;   
-            }
-            
-            else {
-                return 10;
-            }
-        }
-        
-        return 10;
-    }
-    
-    protected int bougeBloc(Deplacement_mem d){
-        if (plateau[d.x2][d.y2][d.z2].entite == null){
-            // Il y a une entite derriere le bloc
-            return -1;
-        }
-        
-        return test_hauteur2(d.x2,d.y2,d.z2);
-    }
-    
-    protected boolean estVide(Deplacement_mem d){
-        if (plateau[d.x2][d.y2][d.z2].entite == null
-                && (plateau[d.x2][d.y2][d.z2+1] != null)){
-            return true;
-        }
-        return false;
-    }
-    
-    // pour bloc uniquement.
-    private int test_hauteur2(int x, int y, int z) {
-    	if (dansletableau(x,y,z)){
-            int aux = z;
-    		while (this.plateau[x][y][aux] == null && aux > 0){
-    			aux--;
-    		}
-    		
-                if (aux == 0){
-                    return 0;
-                }
-                
-                if (plateau[x][y][aux].entite != null){
-                    return -1;
-                }
-                
-                return aux;
-        } 
-        else {
-            return -1;
-        }
-    }    
-     */
+  
  /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
     
     public static void test(){
@@ -470,7 +353,7 @@ public class Plateau {
         private int z;
         private boolean depart;
         private boolean arrivee;
-        private Entite entite;
+        Entite entite;
 
         public Cellule(int x, int y, int z, Byte b, boolean bool, int numBloc, JLayeredPane pa) {
             super(b, pa, numBloc); // Appele le constructeur Bloc(Byte i)
@@ -479,6 +362,10 @@ public class Plateau {
             this.z = z;
             this.entite = null;
             this.arrivee = bool;
+        }
+        
+        public boolean occupe(){
+            return this.entite!=null;
         }
 
         public boolean isArrivee() {
@@ -491,6 +378,7 @@ public class Plateau {
 
         public void deplacer(int x, int y, int z) {
             super.deplacer(x, y, z);
+            InterfaceJeu.actualiservue();
         }
 
         /**
@@ -607,119 +495,5 @@ public class Plateau {
         return false;
     }
 
-    // public void setCellule(int x, int y, int z)
 }
 
-// TESTS
-/*   protected ArrayList<Deplacement> possible(Entite bille) {
-    ArrayList<Deplacement> deplacements = new ArrayList<Deplacement>();
-    // on essaye les 4 déplacements possibles
-    add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), true, false, false, false), deplacements);
-    add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), false, true, false, false), deplacements);
-    add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), false, false, true, false), deplacements);
-    add(test_deplacement(bille, bille.getX(), bille.getY(), bille.getZ(), false, false, false, true), deplacements);
-    return deplacements;
-}
-
-private Deplacement test_deplacement(Entite j, int x, int y, int z, boolean d, boolean g, boolean h, boolean b) {
-    // permet de deplacer la balle, un bloc ou une entite quelconque
-    int x2 = x;
-    int y2 = y;
-
-    if (!testbool(d, g, h, b)) {
-        return null;
-    }
-
-    if (g) {
-        x--;
-        x2 = x - 1;
-        y2 = y;
-    }
-
-    if (d) {
-        x++;
-        x2 = x + 1;
-        y2 = y;
-    }
-
-    if (h) {
-        y++;
-        y2 = y + 1;
-        x2 = x;
-    }
-
-    if (b) {
-        y--;
-        y2 = y - 1;
-        x2 = x;
-    }
-
-    if (dansletableau(x, y, z + 1) && plateau[x][y][z] != null) {
-        return null;
-    }
-
-    if (occupe(x, y, z) && !(occupe(x2, y2, z))) {
-
-        if (plateau[x][y][z].entite == null || !(plateau[x][y][z].entite instanceof Cellule)) {
-            return test_deplacement(plateau[x][y][z], x, y, z, d, g, h, b);
-        }
-        // on peut deplacer un bloc UNIQUEMENT s'il n y a pas un autre bloc au dessus
-        // (mais une balle ou une autre entite c'est possible)
-        // ajoute a la liste des deplacements possible le fait de pouvoir pousser une
-        // entite, un bloc ou autre
-    }
-
-    if (dansletableau(x, y, z) && !occupe(x, y, test_hauteur(x, y, z))) {
-        return new Deplacement(j, x, y, test_hauteur(x, y, z));
-        // sinon, ajoute un deplacement a liste
-    }
-
-    return null;
-}
-
-private boolean testbool(boolean a, boolean b, boolean c, boolean d) {
-    ArrayList<Boolean> test = new ArrayList<Boolean>();
-    test.add(a);
-    test.add(b);
-    test.add(c);
-    test.add(d);
-    int essai = 0;
-    essai = test.stream().filter((aux) -> (aux)).map((_item) -> 1).reduce(essai, Integer::sum);
-    return (essai == 1);
-}
- */
-
- /*    protected boolean getDepart(int x, int y, int z) {
-return cellule_departs.stream().anyMatch((c) -> (c.z == z && c.x == x && c.y == y));
-}
-
-protected boolean addCellule(int x, int y, int z, boolean depart, boolean end) {
-if (dansletableau(x, y, z) && plateau[x][y][z] == null) {
-    Cellule c = new Cellule(x, y, z,1,false,pa,1);
-    if (dansletableau(x, y, z - 1)) {
-        if (!ajouterEntite(c, x, y, z - 1)) {
-            return false;
-        }
-    }
-
-    plateau[x][y][z] = c;
-    plateau[x][y][z].depart = depart;
-    if (depart == true) {
-        cellule_departs.add(plateau[x][y][z]);
-    }
-    plateau[x][y][z].arrivee = end;
-
-    return true;
-}
-return false;
-}
-
-
-
-
-/*   private boolean add(Deplacement d, ArrayList<Deplacement> a) {
-if (d == null) {
-    return false;
-}
-return a.add(d);
-}*/
