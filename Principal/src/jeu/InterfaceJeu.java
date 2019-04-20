@@ -103,7 +103,7 @@ public class InterfaceJeu {
                 pa.requestFocus();
             }
         });
-
+        
         btnVue.setBounds(370, 250, 89, 23);
 
         pa.add(btnNext);
@@ -120,17 +120,16 @@ public class InterfaceJeu {
 
     private static class JFrameJeu extends JFrame {
 
-        Bille b;
-        Plateau plat;
-        JPanel pane;
+        private Bille b;
+        private Plateau plat;
+        private JPanel pane;
 
-        JFrameJeu() {
+        private JFrameJeu() {
             super();
         }
     }
 
     public static void vue(Bille b, Plateau plat) {
-
         if (jf != null) {
             actualiservue();
             return;
@@ -160,7 +159,6 @@ public class InterfaceJeu {
                 } else if (i == b.getX() && j == b.getY() && hauteur == b.getZ()) {
                     pane.getComponent((i * largeur) + j).setBackground(Color.red);
                 } else if (!plateau[i][j][hauteur + 1].jl.getName().equals("vide")) {
-                    System.out.println("Je suis ici !!!");
                     pane.getComponent((i * largeur) + j).setBackground(Color.orange);
                 } else if (!plateau[i][j][hauteur].jl.getName().equals("vide")) {
                     pane.getComponent((i * largeur) + j).setBackground(Color.white);
@@ -189,7 +187,6 @@ public class InterfaceJeu {
                     } else if (i == jf.b.getX() && j == jf.b.getY() && hauteur == jf.b.getZ()) {
                         pane.getComponent((i * largeur) + j).setBackground(Color.red);
                     } else if (!plateau[i][j][hauteur + 1].jl.getName().equals("vide")) {
-                        System.out.println("Je suis ici !!!");
                         pane.getComponent((i * largeur) + j).setBackground(Color.orange);
                     } else if (!plateau[i][j][hauteur].jl.getName().equals("vide")) {
                         pane.getComponent((i * largeur) + j).setBackground(Color.white);
