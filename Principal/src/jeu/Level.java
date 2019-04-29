@@ -74,7 +74,7 @@ public class Level {
 		};
 
 		
-		byte nbbilles=1;//nombre de billes
+		byte nbbille=1;//nombre de billes
 		byte[][] start = {//tableau de tableau de coordonnées des billes
 				{0x0,0x0,0x1},//bille 1
 				{0x0,0x0,0x1},//bille 2
@@ -90,7 +90,7 @@ public class Level {
 
 		byte level[];
 
-		void tab3entab(Byte[][][] tab3){
+		void tab3entab(byte[][][] tab3){
 			dimensions[0]=(byte) tab3[0][0].length;
 			dimensions[1]=(byte) tab3[0].length;
 			dimensions[2]=(byte) tab3.length;			
@@ -103,18 +103,19 @@ public class Level {
 						} 
 		}
 		
-		void writelvleditor(String path,byte[] dim,byte nbbilles,byte[][]depart,byte[][]arrivee,byte[]lv) throws FileNotFoundException, IOException {
+		void writelvleditor(String path,byte nbbilles,byte[][]depart,byte[][]arrivee,byte[][][]lv) throws FileNotFoundException, IOException {
 			FileOutputStream fos = new FileOutputStream(path);
+			tab3entab(lv);
 			System.out.println("sauvegarde du niveau dans "+path);
-			fos.write(dim);
+			fos.write(dimensions);
 			System.out.println("les dimensions sont X"+dimensions[0]+" Y"+dimensions[1]+" Z"+dimensions[2]);
 			fos.write(nbbilles);
-			System.out.println("il y a 8 billes");
+			System.out.println("il y a "+nbbilles+" billes");
 			for(int i=0;i<nbbilles;i++)
 				fos.write(depart[i]);
 			for(int i=0;i<nbbilles;i++)
 				fos.write(arrivee[i]);
-			fos.write(lv);
+			fos.write(level);
 			fos.flush();
 			fos.close();
 			System.out.println("sauvegarde avec succes");
