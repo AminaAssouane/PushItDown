@@ -75,7 +75,7 @@ public class Level {
 
 		
 		byte nbbille=1;//nombre de billes
-		byte[][] start = {//tableau de tableau de coordonnées des billes
+		byte[][] start = {//tableau de tableau de coordonnees des billes
 				{0x0,0x0,0x1},//bille 1
 				{0x0,0x0,0x1},//bille 2
 				{0x0,0x0,0x1},//etc

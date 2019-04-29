@@ -1,10 +1,14 @@
 package jeu;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class Editeur {
 
-    private Byte[][][] plateau;
+    private byte[][][] plateau;
     private byte x, y, z, indice;
-
+    private byte[][] depart = new byte[4][3];
+    private byte[][] arrivee = new byte[4][3];
     // ATTENTION, le dernier etage n'est pas utilisable sinon la bille sort du 
     // tableau, donc les fonctions test pour z-1.
 
@@ -12,19 +16,19 @@ public class Editeur {
         this.indice = ind;
     }
 
-    public Byte[][][] getPlateau() {
+    public byte[][][] getPlateau() {
         return this.plateau;
     }
 
-    public Byte getC(byte x, byte y, byte z) {
+    public byte getC(byte x, byte y, byte z) {
         if (!dansletableau(x, y, z)) {
-            return null;
+            return -1;
         }
         return this.plateau[x][y][z];
     }
 
     public Editeur(byte x, byte y, byte z) {
-        this.plateau = new Byte[x][y][z];
+        this.plateau = new byte[x][y][z];
         this.x = x;
         this.y = y;
         this.z = z;
@@ -36,7 +40,7 @@ public class Editeur {
     }
 
     public boolean add(byte x, byte y, byte z) {
-        if (plateau[x][y][z] == null) {
+        if (plateau[x][y][z] == 0) {
             plateau[x][y][z] = 1;
             return true;
         }
@@ -54,7 +58,7 @@ public class Editeur {
     public boolean adddepart(byte x, byte y, byte z) {
 
         if (dansletableau(x, y, z)) {
-            if (plateau[x][y][z] != null && plateau[x][y][z + 1] == null) {
+            if (plateau[x][y][z] != 0 && plateau[x][y][z + 1] == 0) {
                 if (plateau[x][y][z] != 3) {
                     plateau[x][y][z] = 3;
                     return true;
@@ -66,7 +70,7 @@ public class Editeur {
 
     public boolean addarrive(byte x, byte y, byte z) {
         if (dansletableau(x, y, z)) {
-            if (plateau[x][y][z] != null && plateau[x][y][z + 1] == null) {
+            if (plateau[x][y][z] != 0 && plateau[x][y][z + 1] == 0) {
                 if (plateau[x][y][z] != 2) {
                     plateau[x][y][z] = 2;
                     return true;
@@ -76,9 +80,14 @@ public class Editeur {
         }
         return false;
     }
-
-    public void enregister() {
-        // completer l'enregistrement
+    
+    public void enregister(String path) throws IOException, FileNotFoundException {
+        new Level().writelvleditor(path,(byte)4,depart,arrivee,plateau);
     }
 
+    
+    public static void main (String []args) throws IOException{
+        Editeur e = new Editeur ((byte)10,(byte)10,(byte)10);
+        e.enregister("frm");
+    }
 }
