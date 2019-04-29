@@ -23,7 +23,8 @@ public class InterfaceJeu {
 
     public void nextLevel() throws IOException {
         if (jf != null) {
-            jf = null;
+            jf.setVisible(false);
+            jf =null;
         }
         l.nextlvl();
         niveau++;
