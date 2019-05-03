@@ -18,13 +18,13 @@ public class InterfaceJeu {
     private Plateau plat;
     private JLayeredPane pa;
     private Deplacement d;
-    JButton btnNext, btnRetour, btnVue;
+    JButton btnNext, btnRetour, btnVue, btnRetour2;
     int indBille = 0;
 
     public void nextLevel() throws IOException {
         if (jf != null) {
             jf.setVisible(false);
-            jf =null;
+            jf = null;
         }
         l.nextlvl();
         niveau++;
@@ -93,7 +93,17 @@ public class InterfaceJeu {
             }
         });
 
-        btnNext.setBounds(370, 399, 89, 23);
+        btnNext.setBounds(370, 399, 89, 45);
+
+        btnRetour2 = new JButton("RETOUR BLOC");
+        btnRetour2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                plat.blocarriere();
+                pa.requestFocus();
+            }
+        });
+        btnRetour2.setBounds(370, 125, 89, 23);
+        pa.add(btnRetour2);
 
         btnVue = new JButton("Vu 2D");
         pa.add(btnVue);
@@ -104,7 +114,7 @@ public class InterfaceJeu {
                 pa.requestFocus();
             }
         });
-        
+
         btnVue.setBounds(370, 250, 89, 23);
 
         pa.add(btnNext);
@@ -175,7 +185,7 @@ public class InterfaceJeu {
 
     public static void actualiservue() {
         if (jf != null) {
-            Plateau.Cellule [][][] plateau = jf.plat.getPlateau();
+            Plateau.Cellule[][][] plateau = jf.plat.getPlateau();
             int largeur = plateau.length;
             int longueur = plateau[0].length;
             int hauteur = jf.b.getZ();
