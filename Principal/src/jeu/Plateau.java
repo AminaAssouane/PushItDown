@@ -1,6 +1,5 @@
 package jeu;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import javax.swing.JLayeredPane;
 
@@ -14,7 +13,6 @@ public class Plateau {
     private boolean editeur = false;
     Joueur actuel;
     private ArrayList<Deplacement_mem> deplist = new ArrayList<Deplacement_mem>();
-    private Bille b;
 
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b) {
         this.actuel = new Joueur("Test");
@@ -28,7 +26,6 @@ public class Plateau {
         int numbloc = 0;
         int middle = 200; //=120
         int down = 200; //= 240
-        this.b = b;
         for (int k = 0; k < z; k++) {
             for (int j = 0; j < y; j++) {
                 for (int i = 0; i < x; i++) {
@@ -339,6 +336,29 @@ public class Plateau {
         }
         for (int i = 0; i < n; i++) {
             Deplacement_mem dm = actuel.getList().get(actuel.getList().size() - 1 - i);
+
+            if (!plateau[dm.x2][dm.y2][dm.z2 + 1].jl.getName().equals("vide")) {
+                actuel.getList().remove(actuel.getList().size() - 1);
+                if (actuel.getList().size() > 0) {
+                    Deplacement_mem d = actuel.getList().get(actuel.getList().size() - 1 - i);
+                    d.x1 = dm.x1;
+                    d.y1 = dm.y1;
+                    d.z1 = dm.z1;
+                }
+                return coup_arriere(n);
+            }
+
+            if (plateau[dm.x2][dm.y2][dm.z2].jl.getName().equals("vide")) {
+                actuel.getList().remove(actuel.getList().size() - 1);
+                if (actuel.getList().size() > 0) {
+                    Deplacement_mem d = actuel.getList().get(actuel.getList().size() - 1 - i);
+                    d.x1 = dm.x1;
+                    d.y1 = dm.y1;
+                    d.z1 = dm.z1;
+                }
+                return coup_arriere(n);
+            }
+
             if (!deplacementr(dm, dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2)) {
                 return false;
             }
@@ -371,9 +391,9 @@ public class Plateau {
     public boolean blocarriere() {
         if (deplist.size() > 0) {
             Deplacement_mem aux = deplist.get(deplist.size() - 1);
-            if (plateau[aux.x2][aux.y2][aux.z2].jl.getName().equals("vide") && plateau[aux.x2][aux.y2][aux.z2-1].entite == null
+            if (plateau[aux.x2][aux.y2][aux.z2].jl.getName().equals("vide") && plateau[aux.x2][aux.y2][aux.z2 - 1].entite == null
                     && plateau[aux.x1][aux.y1][aux.z1].entite == null) {
-                
+
                 plateau[aux.x2][aux.y2][aux.z2].deplacer(aux.x2, aux.y2, aux.z2);
                 plateau[aux.x1][aux.y1][aux.z1].vider(aux.x1, aux.y1, aux.z1);
                 deplist.remove(deplist.size() - 1);
