@@ -3,6 +3,8 @@ package jeu;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -21,8 +23,8 @@ public class Accueil {
 	
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(0, 206, 209));
-		frame.setBounds(100, 100, 500, 500);
+		frame.getContentPane().setBackground(Color.BLACK);
+		frame.setBounds(100, 100, 700, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -37,41 +39,52 @@ public class Accueil {
 			}
 		});
                
-                btnEditeur.setBounds(170,400,132,23);
+                btnEditeur.setBounds(200,580,132,23);
                 frame.getContentPane().add(btnEditeur);
                 
-		JButton btnNewButton = new JButton("Nouveau joueur");
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setBackground(Color.BLACK);
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setIcon(new ImageIcon("images\\nouveaujoueur.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cd.nouvellePartie();
 				frame.setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(170, 259, 132, 23);
+		btnNewButton.setBounds(200, 322, 281, 62);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Ancien Joueur");
-		btnNewButton_1.setBounds(170, 293, 132, 23);
+		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.setIcon(new ImageIcon("images\\ancienjoueur.png"));
+		//btnNewButton_1.setBorderPainted(false);
+		btnNewButton_1.setBackground(Color.BLACK);
+		btnNewButton_1.setBounds(200, 382, 281, 57);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JLabel lblPushItDown = new JLabel("Push It Down!");
+		JLabel lblPushItDown = new JLabel("");
+		lblPushItDown.setIcon(new ImageIcon("images\\pushitdown3.png"));
 		lblPushItDown.setForeground(new Color(0, 0, 0));
 		lblPushItDown.setFont(new Font("Royal Acidbath", Font.PLAIN, 50));
-		lblPushItDown.setBounds(67, 114, 364, 73);
+		lblPushItDown.setBounds(60, 103, 588, 138);
 		frame.getContentPane().add(lblPushItDown);
 		
-		JButton btnNewButton_2 = new JButton("Classement");
-		btnNewButton_2.setBounds(170, 327, 132, 23);
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.setIcon(new ImageIcon("images\\classement.png"));
+		btnNewButton_2.setBackground(Color.BLACK);
+		btnNewButton_2.setBounds(200, 437, 281, 57);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		Help h = new Help(this);
-		JButton btnNewButton_3 = new JButton("Help");
+		JButton btnNewButton_3 = new JButton("");
+		btnNewButton_3.setIcon(new ImageIcon("images\\help.png"));
+		btnNewButton_3.setBackground(Color.BLACK);
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				h.getFrame().setVisible(true);
 			}
 		});
-		btnNewButton_3.setBounds(170, 361, 132, 23);
+		btnNewButton_3.setBounds(200, 493, 281, 64);
 		frame.getContentPane().add(btnNewButton_3);
 	}
 	

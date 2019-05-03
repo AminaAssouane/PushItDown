@@ -55,9 +55,9 @@ public class InterfaceJeu {
 
     public void nouvellePartie() {
 
-        f.setBounds(100, 100, 450, 300);
+        f.setBounds(100, 100, 700, 700);
         pa = new JLayeredPane();
-        pa.setPreferredSize(new Dimension(500, 500));
+        pa.setPreferredSize(new Dimension(700, 700));
         pa.setFocusable(true);
 
         plat = new Plateau(pa, l, niveau, b);
@@ -128,7 +128,7 @@ public class InterfaceJeu {
 
         pa.add(btnNext);
 
-        f.setSize(500, 500);
+        f.setSize(600, 600);
         f.getContentPane().setBackground(new Color(0, 206, 209));
         f.setLocationRelativeTo(null);
         f.getContentPane().add(pa, BorderLayout.CENTER);

@@ -11,15 +11,10 @@ public class Bloc implements Entite{
 	protected JLayeredPane pa;
 	protected int numBloc; // entier qui sert à superposer les composants ((numBloc1 > numBloc2) -> le bloc de numBloc1 est devant celui de numBloc2 
         private int x,y,z;
-	static ImageIcon vide = new ImageIcon("CUBE0.png");
-	static ImageIcon ii = new ImageIcon("CUBE.png");
-	static ImageIcon ii2 = new ImageIcon("CUBEa.png");
-	static ImageIcon ii3 = new ImageIcon("CUBEb.png");
-	static ImageIcon ii4 = new ImageIcon("BALL.png");
-	static ImageIcon ii5 = new ImageIcon("BALLa.png");
-	static ImageIcon ii6 = new ImageIcon("BALLb.png");
-	static ImageIcon ii7 = new ImageIcon("CUBEc.png");
-	static ImageIcon ii8 = new ImageIcon("CUBEd.png");
+	static ImageIcon vide = new ImageIcon("images\\CUBE0.png");
+	static ImageIcon ii = new ImageIcon("images\\CUBE.png");
+	static ImageIcon ii2 = new ImageIcon("images\\CUBEa.png");
+	static ImageIcon ii3 = new ImageIcon("images\\CUBEb.png");
 	BufferedImage image;
 
 	Bloc() {
@@ -43,26 +38,6 @@ public class Bloc implements Entite{
 		case 3:
 			jl = new JLabel(ii3);
 			jl.setName("ii3");
-			break;
-		case 4:
-			jl = new JLabel(ii4);
-			jl.setName("ii4");
-			break;
-		case 5:
-			jl = new JLabel(ii5);
-			jl.setName("ii5");
-			break;
-		case 6:
-			jl = new JLabel(ii6);
-			jl.setName("ii6");
-			break;
-		case 7:
-			jl = new JLabel(ii7);
-			jl.setName("ii7");
-			break;
-		case 8:
-			jl = new JLabel(ii8);
-			jl.setName("ii8");
 			break;
 		}
 		jl.setBounds(0, 0, 40, 40);

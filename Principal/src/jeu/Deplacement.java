@@ -8,8 +8,8 @@ public class Deplacement implements KeyListener{
 	Plateau plat;
 	Bille b;
 	JButton btnNext;
-	JLabel feux = new JLabel(new ImageIcon("blue.gif"));
-	JLabel feux2 = new JLabel(new ImageIcon("pink.gif"));
+	JLabel feux = new JLabel(new ImageIcon("images\\blue.gif"));
+	JLabel feux2 = new JLabel(new ImageIcon("images\\pink.gif"));
 	public Deplacement(Plateau plat, Bille b, JButton btn){
 		this.plat = plat;
 		this.b = b;

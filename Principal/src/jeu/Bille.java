@@ -20,7 +20,7 @@ public class Bille implements Entite {
         this.x = x;
         this.y = y;
         this.z = z;
-        jl = new JLabel(new ImageIcon("BALL.png"));
+        jl = new JLabel(new ImageIcon("images\\BALL.png"));
         jl.setBounds(200, 200 - ((z + 1) * 20 + 2), 40, 40);
         pa.add(jl, 1000, 1);
     }
