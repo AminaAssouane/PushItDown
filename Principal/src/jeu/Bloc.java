@@ -49,14 +49,14 @@ public class Bloc implements Entite{
 		pa.remove(jl);
 		this.jl = new JLabel(vide);
 		this.jl.setName("vide");
-		jl.setBounds(200 + (x * 20) - (20 * y), 200 + (x * 10) + (10 * y) - (20 * z), 40, 40);
+		jl.setBounds(300 + (x * 20) - (20 * y), 300 + (x * 10) + (10 * y) - (20 * z), 40, 40);
 		pa.add(jl,numBloc,1);
 	}
 	
 	public void deplacer(int x, int y, int z){
 		this.jl = new JLabel(ii);
 		this.jl.setName("ii");
-		jl.setBounds(200 + (x * 20) - (20 * y), 200 + (x * 10) + (10 * y) - (20 * z), 40, 40);
+		jl.setBounds(300 + (x * 20) - (20 * y), 300 + (x * 10) + (10 * y) - (20 * z), 40, 40);
 		pa.add(jl,numBloc,1);
 	}
 

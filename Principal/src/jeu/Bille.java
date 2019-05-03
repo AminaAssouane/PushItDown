@@ -21,7 +21,7 @@ public class Bille implements Entite {
         this.y = y;
         this.z = z;
         jl = new JLabel(new ImageIcon("images\\BALL.png"));
-        jl.setBounds(200, 200 - ((z + 1) * 20 + 2), 40, 40);
+        jl.setBounds(300, 300 - ((z + 1) * 20 + 2), 40, 40);
         pa.add(jl, 1000, 1);
     }
 
@@ -31,13 +31,13 @@ public class Bille implements Entite {
     }
 
     public void deplacer(int x, int y, int z, int numBloc) {
-        jl.setBounds(200 + (x * 20) - (y * 20), 200 + (x * 10) + (10 * y) - ((z + 1) * 20 + 2), 40, 40);
+        jl.setBounds(300 + (x * 20) - (y * 20), 300 + (x * 10) + (10 * y) - ((z + 1) * 20 + 2), 40, 40);
         this.pa.add(jl, numBloc, 1);
     }
 
     public void deplacer(int x, int y, int z) {
 
-        jl.setBounds(200 + (x * 20) - (y * 20), 200 + (x * 10) + (10 * y) - ((z + 1) * 20 + 2), 40, 40);
+        jl.setBounds(300 + (x * 20) - (y * 20), 300 + (x * 10) + (10 * y) - ((z + 1) * 20 + 2), 40, 40);
         this.pa.add(jl, 10000, 1);
     }
 
