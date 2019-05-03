@@ -44,8 +44,17 @@ public class InterfaceJeu {
         d = new Deplacement(plat, b, btnNext);
         pa.addKeyListener(d);
     }
+    
+    public void nouveauJoueur(){
+    	f.setBounds(100, 100, 450, 300);
+        pa = new JLayeredPane();
+        pa.setPreferredSize(new Dimension(500, 500));
+        pa.setFocusable(true);
+    	
+    }
 
     public void nouvellePartie() {
+
         f.setBounds(100, 100, 450, 300);
         pa = new JLayeredPane();
         pa.setPreferredSize(new Dimension(500, 500));
