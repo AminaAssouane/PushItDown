@@ -142,6 +142,7 @@ public class InterfaceJeu {
 
     public static void vue(Bille b, Plateau plat) {
         if (jf != null) {
+            jf.setVisible(true);
             actualiservue();
             return;
         }
@@ -155,7 +156,7 @@ public class InterfaceJeu {
         int largeur = plateau.length;
         int longueur = plateau[0].length;
         Border bordure = BorderFactory.createLineBorder(Color.gray, 1);
-        JPanel pane = new JPanel(new GridLayout((largeur), (longueur)));
+        JPanel pane = new JPanel(new GridLayout((longueur), (largeur)));
         jf.pane = pane;
         for (int i = 0; i < longueur * largeur; i++) {
             JPanel boite = new JPanel();
@@ -166,15 +167,15 @@ public class InterfaceJeu {
             for (int j = 0; j < longueur; j++) {
 
                 if (plateau[i][j][hauteur].isArrivee()) {
-                    pane.getComponent((i * largeur) + j).setBackground(Color.cyan);
+                    pane.getComponent((i) + (longueur)*j).setBackground(Color.cyan);
                 } else if (i == b.getX() && j == b.getY() && hauteur == b.getZ()) {
-                    pane.getComponent((i * largeur) + j).setBackground(Color.red);
+                    pane.getComponent((i) + j*longueur).setBackground(Color.red);
                 } else if (!plateau[i][j][hauteur + 1].jl.getName().equals("vide")) {
-                    pane.getComponent((i * largeur) + j).setBackground(Color.orange);
+                    pane.getComponent((i) + j*longueur).setBackground(Color.orange);
                 } else if (!plateau[i][j][hauteur].jl.getName().equals("vide")) {
-                    pane.getComponent((i * largeur) + j).setBackground(Color.white);
+                    pane.getComponent((i) + j*longueur).setBackground(Color.white);
                 } else if (plateau[i][j][hauteur].jl.getName().equals("vide")) {
-                    pane.getComponent((i * largeur) + j).setBackground(Color.black);
+                    pane.getComponent((i) + j*longueur).setBackground(Color.black);
                 }
             }
         }
@@ -192,18 +193,17 @@ public class InterfaceJeu {
             JPanel pane = jf.pane;
             for (int i = 0; i < largeur; i++) {
                 for (int j = 0; j < longueur; j++) {
-
-                    if (plateau[i][j][hauteur].isArrivee()) {
-                        pane.getComponent((i * largeur) + j).setBackground(Color.cyan);
-                    } else if (i == jf.b.getX() && j == jf.b.getY() && hauteur == jf.b.getZ()) {
-                        pane.getComponent((i * largeur) + j).setBackground(Color.red);
-                    } else if (!plateau[i][j][hauteur + 1].jl.getName().equals("vide")) {
-                        pane.getComponent((i * largeur) + j).setBackground(Color.orange);
-                    } else if (!plateau[i][j][hauteur].jl.getName().equals("vide")) {
-                        pane.getComponent((i * largeur) + j).setBackground(Color.white);
-                    } else if (plateau[i][j][hauteur].jl.getName().equals("vide")) {
-                        pane.getComponent((i * largeur) + j).setBackground(Color.black);
-                    }
+                if (plateau[i][j][hauteur].isArrivee()) {
+                    pane.getComponent((i) + (longueur)*j).setBackground(Color.cyan);
+                } else if (i == jf.b.getX() && j ==jf.b.getY() && hauteur == jf.b.getZ()) {
+                    pane.getComponent((i) + j*longueur).setBackground(Color.red);
+                } else if (!plateau[i][j][hauteur + 1].jl.getName().equals("vide")) {
+                    pane.getComponent((i) + j*longueur).setBackground(Color.orange);
+                } else if (!plateau[i][j][hauteur].jl.getName().equals("vide")) {
+                    pane.getComponent((i) + j*longueur).setBackground(Color.white);
+                } else if (plateau[i][j][hauteur].jl.getName().equals("vide")) {
+                    pane.getComponent((i) + j*longueur).setBackground(Color.black);
+                }
                 }
             }
         }
