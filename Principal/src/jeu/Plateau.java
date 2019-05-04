@@ -14,6 +14,9 @@ public class Plateau {
     private Joueur actuel;
     private ArrayList<Deplacement_mem> deplist = new ArrayList<Deplacement_mem>();
 
+    
+    
+    
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b, Joueur jou) {
         this.actuel = jou;
         jou.getList().clear();
