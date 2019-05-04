@@ -22,10 +22,9 @@ public class InterfaceJeu {
     private Deplacement d;
     private JButton btnNext, btnRetour, btnVue, btnRetour2, btnRestart, btnNewPlayer;
     int indBille = 0;
-    private JLabel monScore;
-    private Joueur j;
 
-    public void recommencer() {
+    private Joueur j;
+  public void recommencer() {
         if (jf != null) {
             jf.setVisible(false);
             jf = null;
@@ -48,12 +47,13 @@ public class InterfaceJeu {
         pa.addKeyListener(d);
     }
 
+
     public void nextLevel() throws IOException {
         if (jf != null) {
             jf.setVisible(false);
             jf = null;
         }
-        // = j.score(l.getX(niveau) + l.getY(niveau));
+               // = j.score(l.getX(niveau) + l.getY(niveau));
         //    monScore.setText(String.valueOf(j.getScore())); .nextlvl();
         niveau++;
         b.efface();
@@ -211,13 +211,6 @@ public class InterfaceJeu {
         btnRestart = new JButton("");
         btnRestart.setBackground(new Color(128, 128, 128));
         btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
-
-        btnRestart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                recommencer();
-            }
-        });
         btnRestart.setBounds(451, 432, 209, 41);
         pa.add(btnRestart);
 
@@ -228,13 +221,31 @@ public class InterfaceJeu {
         pa.add(pseudo);
 
         btnVue.setBounds(452, 484, 208, 41);
-        
+        pa.add(btnVue);
 
-        monScore = new JLabel(String.valueOf(j.getScore()));
-        monScore.setForeground(new Color(255, 215, 0));
-        monScore.setFont(new Font("Gabriela", Font.BOLD, 18));
-        monScore.setBounds(555, 38, 105, 23);
-        pa.add(monScore);
+        btnRestart = new JButton("");
+        btnRestart.setBackground(new Color(128, 128, 128));
+        btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
+        btnRestart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                recommencer();
+            }
+        });
+        btnRestart.setBounds(451, 432, 209, 41);
+        pa.add(btnRestart);
+
+        //JLabel pseudo = new JLabel(j.getNom());
+        pseudo.setForeground(new Color(255, 215, 0));
+        pseudo.setFont(new Font("Gabriela", Font.BOLD, 20));
+        pseudo.setBounds(165, 38, 139, 23);
+        pa.add(pseudo);
+
+        //monScore = new JLabel(String.valueOf(j.getScore()));
+        //monScore.setForeground(new Color(255, 215, 0));
+        //monScore.setFont(new Font("Gabriela", Font.BOLD, 18));
+        //monScore.setBounds(555, 38, 105, 23);
+        //pa.add(monScore);
         d = new Deplacement(plat, b, btnNext);
         pa.addKeyListener(d);
 
