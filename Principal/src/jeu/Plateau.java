@@ -24,8 +24,8 @@ public class Plateau {
         this.pa = pa;
         plateau = new Cellule[x][y][z];
         int numbloc = 0;
-        int middle = 200; //=120
-        int down = 200; //= 240
+        int middle = 300; //=120
+        int down = 300; //= 240
         for (int k = 0; k < z; k++) {
             for (int j = 0; j < y; j++) {
                 for (int i = 0; i < x; i++) {

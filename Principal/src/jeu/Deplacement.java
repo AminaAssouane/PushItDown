@@ -69,19 +69,20 @@ public class Deplacement implements KeyListener{
 	}
 	
 	public void efface(){
-		this.plat.getPanel().remove(feux);
-		this.plat.getPanel().remove(feux2);
+		this.feux.setVisible(false);
+		this.feux2.setVisible(false);
 	}
 	
 	public void gagne(){
 		/* Feux d'artifices */
-		feux.setBounds(0, 0, 500, 500);
-		feux2.setBounds(-20, -20, 500, 500);
+		feux.setBounds(100, 100, 500, 500);
+		feux2.setBounds(80, 80, 500, 500);
 		this.plat.getPanel().add(feux,1000,1);
 		this.plat.getPanel().add(feux2,1000,1);
 		/* Le bouton NEXT s'affiche */
-		if (btnNext != null) 
+		if (btnNext != null) {
 			btnNext.setVisible(true);
+		}
 	}
 
 }

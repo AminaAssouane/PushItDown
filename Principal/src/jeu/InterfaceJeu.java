@@ -18,7 +18,7 @@ public class InterfaceJeu {
     private Plateau plat;
     private JLayeredPane pa;
     private Deplacement d;
-    JButton btnNext, btnRetour, btnVue, btnRetour2;
+    JButton btnNext, btnRetour, btnVue, btnRetour2, btnRestart;
     int indBille = 0;
 
     public void nextLevel() throws IOException {
@@ -56,6 +56,7 @@ public class InterfaceJeu {
     public void nouvellePartie() {
 
         f.setBounds(100, 100, 700, 700);
+        f.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\icone.png"));
         pa = new JLayeredPane();
         pa.setPreferredSize(new Dimension(700, 700));
         pa.setFocusable(true);
@@ -67,55 +68,69 @@ public class InterfaceJeu {
         }
         b = new Bille(0, 0, indBille, pa);
 
-        d = new Deplacement(plat, b, btnNext);
-        pa.addKeyListener(d);
+        
 
-        JLabel lblJoueur = new JLabel("Joueur : ");
-        lblJoueur.setBackground(new Color(154, 205, 50));
-        lblJoueur.setBounds(33, 45, 46, 14);
+        JLabel lblJoueur = new JLabel("");
+        lblJoueur.setIcon(new ImageIcon("images\\joueur.png"));
+		lblJoueur.setBackground(new Color(154, 205, 50));
+		lblJoueur.setBounds(38, 38, 123, 23);
         pa.add(lblJoueur);
 
-        JLabel lblScore = new JLabel("Score :");
-        lblScore.setBounds(348, 45, 46, 14);
+        JLabel lblScore = new JLabel("");
+        lblScore.setIcon(new ImageIcon("images\\score.png"));
+        lblScore.setBounds(492, 38, 112, 23);
         pa.add(lblScore);
 
-        btnRetour = new JButton("RETOUR >");
+        btnRetour = new JButton("");
+        btnRetour.setBackground(new Color(169, 169, 169));
+		btnRetour.setIcon(new ImageIcon("images\\retourbille.png"));
         btnRetour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 plat.retour(1);
                 pa.requestFocus();
             }
         });
-        btnRetour.setBounds(370, 70, 100, 23);
-        pa.add(btnRetour);
+		btnRetour.setBounds(20, 432, 209, 41);
+		pa.add(btnRetour);
 
-        btnNext = new JButton("NEXT >");
+        btnNext = new JButton("");
+
+        
+		btnNext.setBackground(new Color(0, 0, 0));
+		btnNext.setBorderPainted(false);
+		btnNext.setIcon(new ImageIcon("images\\next.png"));
         btnNext.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 try {
                     nextLevel();
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
-                    e.printStackTrace();
+                	System.out.println("Vous avez fini!");
+                    //e.printStackTrace();
                 }
                 btnNext.setVisible(false);
             }
         });
+        btnNext.setVisible(false);
+		btnNext.setBounds(234, 548, 210, 81);
+		pa.add(btnNext);
 
-        btnNext.setBounds(370, 399, 89, 45);
-
-        btnRetour2 = new JButton("RETOUR BLOC");
+		
+        btnRetour2 = new JButton("");
+        btnRetour2.setBackground(new Color(105, 105, 105));
+		btnRetour2.setIcon(new ImageIcon("images\\retourbloc.png"));
         btnRetour2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 plat.blocarriere();
                 pa.requestFocus();
             }
         });
-        btnRetour2.setBounds(370, 125, 89, 23);
+        btnRetour2.setBounds(20, 484, 209, 41);
         pa.add(btnRetour2);
 
-        btnVue = new JButton("Vu 2D");
-        pa.add(btnVue);
+        btnVue = new JButton("");
+        btnVue.setBackground(new Color(192, 192, 192));
+		btnVue.setIcon(new ImageIcon("images\\vue2d.png"));
         btnVue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -123,13 +138,19 @@ public class InterfaceJeu {
                 pa.requestFocus();
             }
         });
+		btnVue.setBounds(452, 484, 208, 41);
+		pa.add(btnVue);
+		
+		btnRestart = new JButton("");
+		btnRestart.setBackground(new Color(128, 128, 128));
+		btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
+		btnRestart.setBounds(451, 432, 209, 41);
+		pa.add(btnRestart);
+		
+		d = new Deplacement(plat, b, btnNext);
+        pa.addKeyListener(d);
 
-        btnVue.setBounds(370, 250, 89, 23);
-
-        pa.add(btnNext);
-
-        f.setSize(600, 600);
-        f.getContentPane().setBackground(new Color(0, 206, 209));
+        f.getContentPane().setBackground(new Color(0, 0, 0));
         f.setLocationRelativeTo(null);
         f.getContentPane().add(pa, BorderLayout.CENTER);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
