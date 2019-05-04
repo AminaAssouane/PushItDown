@@ -23,7 +23,7 @@ public class Joueur {
 		this.avatar = null;
 	}
 	
-	// Ajoute un deplacement ï¿½ la liste de coups 
+	// Ajoute un deplacement ï¿½ la liste de coups, et incremente le nombre de coups dans le niveau
 	public void addCoup(Plateau.Deplacement_mem dep){
 		this.listCoups.addLast(dep);
 		nbCoups++;
@@ -46,14 +46,24 @@ public class Joueur {
 			this.bestScore = this.score;	
 	}
 	
-	/* Si le nombre de coups effectué est égale à la longueur du plateau + sa largeur (situation optimale, 
-	 * c'est le minimum de coups effectués possible, alors le score obtenu est 50)
+	/* Si le nombre de coups effectue est egale a la longueur du plateau + sa largeur (situation optimale, 
+	 * c'est le minimum de coups effectues possible, alors le score obtenu est 50)
+	 * 
+	 * Si c'est egale à cette taille + (taille/2), le score du level est de 40
+	 * etc...
 	 * */
-	public void scoreLevel(int taille){
-		if (this.nbCoups == taille)
-			this.score = this.score + 50;
-		//else
-		//	if (this.nbCoups == taille)
+	public void score(int taille){
+		if (this.nbCoups <= taille)
+			this.setScore(this.score + 50);
+		else
+			if (this.nbCoups <= taille+(taille/2))
+				this.setScore(this.score + 40);
+			else
+				if (this.nbCoups <= 2*taille)
+					this.setScore(this.score + 30);
+				else 
+					this.setScore(this.score + 10);
+		this.nbCoups = 0;
 	}
 	
 	// Possibilitï¿½ d'ajouter un avatar
@@ -70,6 +80,14 @@ public class Joueur {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+	
+	public int getScore(){
+		return this.score;
+	}
+	
+	public void setScore(int sc){
+		this.score = sc;
 	}
 	
 	public int getBestScore() {

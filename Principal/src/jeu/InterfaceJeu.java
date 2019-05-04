@@ -14,6 +14,7 @@ public class InterfaceJeu {
     private JFrame f = new JFrame();
     private JFrame fj = new JFrame();
 	private JTextField textField;
+	private JLabel monScore;
     private Level l = new Level(1);
     private int niveau = 1;
     private Bille b;
@@ -30,6 +31,9 @@ public class InterfaceJeu {
             jf.setVisible(false);
             jf = null;
         }
+        
+        j.score(l.getX(niveau)+l.getY(niveau));
+        monScore.setText(String.valueOf(j.getScore()));
         l.nextlvl();
         niveau++;
         b.efface();
@@ -126,7 +130,7 @@ public class InterfaceJeu {
 
         JLabel lblScore = new JLabel("");
         lblScore.setIcon(new ImageIcon("images\\score.png"));
-        lblScore.setBounds(492, 38, 112, 23);
+        lblScore.setBounds(452, 38, 105, 23);
         pa.add(lblScore);
 
         btnRetour = new JButton("");
@@ -200,6 +204,12 @@ public class InterfaceJeu {
 		pseudo.setFont(new Font("Gabriela", Font.BOLD, 20));
 		pseudo.setBounds(165, 38, 139, 23);
 		pa.add(pseudo);
+		
+		monScore = new JLabel(String.valueOf(j.getScore()));
+		monScore.setForeground(new Color(255, 215, 0));
+		monScore.setFont(new Font("Gabriela", Font.BOLD, 18));
+		monScore.setBounds(555, 38, 105, 23);
+		pa.add(monScore);
 		
 		d = new Deplacement(plat, b, btnNext);
         pa.addKeyListener(d);
