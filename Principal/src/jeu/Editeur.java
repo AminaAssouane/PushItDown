@@ -111,6 +111,7 @@ public class Editeur {
         e.enregister("ter");
         byte[][][] a={{{1,2,1,1},{1,1,2,1},{1,3,1,1}},{{1,1,1,4},{1,1,1,1},{1,0,1,0}}};
         e.plateau=a;
+        //byte[][][] a=e.plateau;
         EditeurVue ev =new EditeurVue();
         JFrame plp=new JFrame();
         plp.setSize(600, 600);
