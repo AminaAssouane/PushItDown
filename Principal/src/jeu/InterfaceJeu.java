@@ -49,12 +49,16 @@ public class InterfaceJeu {
     }
 
     public void nextLevel() throws IOException {
+    	
         if (jf != null) {
             jf.setVisible(false);
             jf = null;
         }
-        // = j.score(l.getX(niveau) + l.getY(niveau));
-        //    monScore.setText(String.valueOf(j.getScore())); .nextlvl();
+        
+        j.score(l.getX(niveau) + l.getY(niveau));
+        monScore.setText(String.valueOf(j.getScore())); 
+        j.setNbCoups(0);
+        l.nextlvl();
         niveau++;
         b.efface();
         d.efface();
@@ -147,7 +151,7 @@ public class InterfaceJeu {
 
         JLabel lblScore = new JLabel("");
         lblScore.setIcon(new ImageIcon("images\\score.png"));
-        lblScore.setBounds(492, 38, 112, 23);
+        lblScore.setBounds(452, 38, 105, 23);
         pa.add(lblScore);
 
         btnRetour = new JButton("");
@@ -211,7 +215,6 @@ public class InterfaceJeu {
         btnRestart = new JButton("");
         btnRestart.setBackground(new Color(128, 128, 128));
         btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
-
         btnRestart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -227,8 +230,6 @@ public class InterfaceJeu {
         pseudo.setFont(new Font("Gabriela", Font.BOLD, 20));
         pseudo.setBounds(165, 38, 139, 23);
         pa.add(pseudo);
-
-        btnVue.setBounds(452, 484, 208, 41);
         
 
         monScore = new JLabel(String.valueOf(j.getScore()));
@@ -236,6 +237,8 @@ public class InterfaceJeu {
         monScore.setFont(new Font("Gabriela", Font.BOLD, 18));
         monScore.setBounds(555, 38, 105, 23);
         pa.add(monScore);
+        
+        
         d = new Deplacement(plat, b, btnNext);
         pa.addKeyListener(d);
 

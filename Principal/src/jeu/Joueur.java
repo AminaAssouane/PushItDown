@@ -23,9 +23,6 @@ public class Joueur {
 		this.avatar = null;
 	}
 	
-        public void setNbCoups(int n){
-            this.nbCoups = 0;
-        }
         
 	// Ajoute un deplacement � la liste de coups 
 	public void addCoup(Plateau.Deplacement_mem dep){
@@ -53,11 +50,17 @@ public class Joueur {
 	/* Si le nombre de coups effectue est egale a la longueur du plateau + sa largeur (situation optimale, 
 	 * c'est le minimum de coups effectu�s possible, alors le score obtenu est 50)
 	 * */
-	public void scoreLevel(int taille){
-		if (this.nbCoups == taille)
+	public void score(int taille){
+		if (this.nbCoups <= taille)
 			this.score = this.score + 50;
-		//else
-		//	if (this.nbCoups == taille)
+		else 
+			if  (this.nbCoups <= taille + (taille/2))
+				this.score = this.score + 40;
+			else 
+				if  (this.nbCoups <= taille*2)
+					this.score = this.score + 30;
+				else 
+					this.score = this.score + 10;
 	}
 	
 	// Possibilit� d'ajouter un avatar
@@ -68,7 +71,7 @@ public class Joueur {
 	
 	/* GETTERS AND SETTERS */
 	
-        public int getScore(){
+    public int getScore(){
 		return this.score;
 	}
 	
@@ -86,6 +89,14 @@ public class Joueur {
 	
 	public int getBestScore() {
 		return bestScore;
+	}
+	
+	public int getNbCoups(){
+		return this.nbCoups;
+	}
+	
+	public void setNbCoups(int nb){
+		this.nbCoups = nb;
 	}
 
 	public void setBestScore(int bestScore) {
