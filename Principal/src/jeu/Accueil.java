@@ -48,7 +48,7 @@ public class Accueil {
 		btnNewButton.setIcon(new ImageIcon("images\\nouveaujoueur.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cd.nouvellePartie();
+				cd.nouveauJoueur();
 				frame.setVisible(false);
 			}
 		});

@@ -12,14 +12,18 @@ import jeu.Plateau.Cellule;
 public class InterfaceJeu {
 
     private JFrame f = new JFrame();
+    private JFrame fj = new JFrame();
+	private JTextField textField;
     private Level l = new Level(1);
     private int niveau = 1;
     private Bille b;
     private Plateau plat;
     private JLayeredPane pa;
     private Deplacement d;
-    JButton btnNext, btnRetour, btnVue, btnRetour2, btnRestart;
+    private JButton btnNext, btnRetour, btnVue, btnRetour2, btnRestart, btnNewPlayer;
     int indBille = 0;
+    
+    private Joueur j;
 
     public void nextLevel() throws IOException {
         if (jf != null) {
@@ -45,16 +49,60 @@ public class InterfaceJeu {
         pa.addKeyListener(d);
     }
     
+    
     public void nouveauJoueur(){
-    	f.setBounds(100, 100, 450, 300);
-        pa = new JLayeredPane();
-        pa.setPreferredSize(new Dimension(500, 500));
-        pa.setFocusable(true);
+    	fj.setBounds(100, 100, 300, 300);
+    	fj.getContentPane().setBackground(new Color(0, 0, 0));
+    	fj.getContentPane().setLayout(null);
     	
+    	textField = new JTextField();
+		textField.setBounds(64, 143, 152, 28);
+		textField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int touche = e.getKeyCode();
+				switch (touche){
+				case KeyEvent.VK_ENTER :
+					j = new Joueur(textField.getText());
+					fj.setVisible(false);
+					nouvellePartie();
+					break;
+				}
+			}
+		});
+		fj.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("images\\pseudo.png"));
+		lblNewLabel.setBounds(39, 68, 224, 28);
+		
+		btnNewPlayer = new JButton("");
+		btnNewPlayer.setBorderPainted(false);
+		btnNewPlayer.setBackground(new Color(0, 0, 0));
+		btnNewPlayer.setIcon(new ImageIcon("images\\go.png"));
+		btnNewPlayer.setBounds(118, 198, 42, 33);
+		fj.getContentPane().add(btnNewPlayer);	
+		
+		btnNewPlayer.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				j = new Joueur(textField.getText());
+				if (j.getNom() != ""){
+					fj.setVisible(false);
+					nouvellePartie();
+				}
+			}
+		});
+
+		fj.getContentPane().add(lblNewLabel);
+		fj.setLocationRelativeTo(null);
+		fj.setVisible(true);
+		fj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+   
     }
 
     public void nouvellePartie() {
-
         f.setBounds(100, 100, 700, 700);
         f.setIconImage(Toolkit.getDefaultToolkit().getImage("images\\icone.png"));
         pa = new JLayeredPane();
@@ -146,6 +194,12 @@ public class InterfaceJeu {
 		btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
 		btnRestart.setBounds(451, 432, 209, 41);
 		pa.add(btnRestart);
+		
+		JLabel pseudo = new JLabel(j.getNom());
+		pseudo.setForeground(new Color(255, 215, 0));
+		pseudo.setFont(new Font("Gabriela", Font.BOLD, 20));
+		pseudo.setBounds(165, 38, 139, 23);
+		pa.add(pseudo);
 		
 		d = new Deplacement(plat, b, btnNext);
         pa.addKeyListener(d);
