@@ -11,10 +11,12 @@ public class Joueur {
 	private int bestScore;
 	private int lvlMaxAtteint;
 	private LinkedList<Plateau.Deplacement_mem> listCoups;
+	private int nbCoups;
 	private ImageIcon avatar;
 
 	public Joueur(String nom) {
 		this.setNom(nom);
+		this.score = 0;
 		this.bestScore = 0;
 		this.lvlMaxAtteint = 0;
 		this.listCoups = new LinkedList<Plateau.Deplacement_mem>();
@@ -24,6 +26,7 @@ public class Joueur {
 	// Ajoute un deplacement ï¿½ la liste de coups 
 	public void addCoup(Plateau.Deplacement_mem dep){
 		this.listCoups.addLast(dep);
+		nbCoups++;
 	}
 	
 	// Renvoie (mais NE RETIRE PAS) le dernier coup effectuï¿½ par le joueur
@@ -41,6 +44,16 @@ public class Joueur {
 	public void sauvegarde(){
 		if (this.score > this.bestScore)
 			this.bestScore = this.score;	
+	}
+	
+	/* Si le nombre de coups effectué est égale à la longueur du plateau + sa largeur (situation optimale, 
+	 * c'est le minimum de coups effectués possible, alors le score obtenu est 50)
+	 * */
+	public void scoreLevel(int taille){
+		if (this.nbCoups == taille)
+			this.score = this.score + 50;
+		//else
+		//	if (this.nbCoups == taille)
 	}
 	
 	// Possibilitï¿½ d'ajouter un avatar

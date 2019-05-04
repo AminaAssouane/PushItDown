@@ -11,11 +11,11 @@ public class Plateau {
     private JLayeredPane pa;
     private Level l;
     private boolean editeur = false;
-    Joueur actuel;
+    private Joueur actuel;
     private ArrayList<Deplacement_mem> deplist = new ArrayList<Deplacement_mem>();
 
-    public Plateau(JLayeredPane pa, Level l, int niv, Bille b) {
-        this.actuel = new Joueur("Test");
+    public Plateau(JLayeredPane pa, Level l, int niv, Bille b, Joueur jou) {
+        this.actuel = jou;
         this.niv = niv;
         this.l = l;
         this.x = l.getX(niv);
