@@ -114,8 +114,15 @@ public class Joueur {
 		return this.listCoups;
 	}
         
-        public LinkedList<Plateau.Deplacement_mem> getList(){
-            return this.listCoups;
-        }
-
+    public LinkedList<Plateau.Deplacement_mem> getList(){
+        return this.listCoups;
+    }
+    
+    public int getNbCoups(){
+    	return this.nbCoups;
+    }
+    
+    public void setNbCoups(int nb){
+    	this.nbCoups = nb;
+    }
 }

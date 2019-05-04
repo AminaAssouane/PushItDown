@@ -25,6 +25,30 @@ public class InterfaceJeu {
     int indBille = 0;
     
     private Joueur j;
+    
+    public void recommencer(){
+    	if (jf != null) {
+            jf.setVisible(false);
+            jf = null;
+        }
+    	
+    	b.efface();
+        d.efface();
+        pa.removeKeyListener(d);
+        plat.efface();
+        j.setNbCoups(0);
+        
+    	plat = new Plateau(pa, l, niveau, b, j);
+        indBille = l.getZ(niveau) - 1;
+        while (plat.getCellule(0, 0, indBille).jl.getName().equals("vide")) {
+            indBille--;
+        }
+        b = new Bille(0, 0, indBille, pa);
+        
+        d = new Deplacement(plat, b, btnNext);
+        pa.addKeyListener(d);
+    	
+    }
 
     public void nextLevel() throws IOException {
         if (jf != null) {
@@ -196,6 +220,12 @@ public class InterfaceJeu {
 		btnRestart = new JButton("");
 		btnRestart.setBackground(new Color(128, 128, 128));
 		btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
+		btnRestart.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+            	recommencer();
+            }
+        });
 		btnRestart.setBounds(451, 432, 209, 41);
 		pa.add(btnRestart);
 		
