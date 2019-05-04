@@ -47,14 +47,14 @@ public class EditeurVue {
 			int down=2*middle;
 			for(int i = 0;i<x;++i) 
 				for(int j = 0;j<y;++j)
-					for(int k = 0;k<z;++k) {
+					for(int k = z;k>0;--k) {
 						System.out.println(i+""+j+""+k+" "+blocs[i][j][k]);
 						grid[i][j][k]=new Bloc(blocs[i][j][k]);
 						grid[i][j][k].jl.setBounds(
 								middle-20*k+20*j+xoffset,
 								 down-k*10-10*j+20*i+yoffset
 								, 40, 40);
-                                                System.out.println(i+" "+j+" "+k+" ");
+                                                System.out.println(i+" "+j+" "+k+"\n");
                                              plplp.add(grid[i][j][k].jl);
 					}
 
