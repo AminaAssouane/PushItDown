@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.FileReader;
 public class Level {
 	
     /* Les niveaux sont crées comme suit : */
@@ -182,6 +186,34 @@ public class Level {
 			file="levels\\level"+currentlvl;
 			readlvl(file);
 		} 
+                
+                
+                void saveplayer(String playername,int score) throws IOException{//peut ecrire par dessus un joueur deja existant
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("players.txt",true));
+//                        writer.write(playername +" "+ score+"\n");
+                        writer.append(playername+" "+ score+"\n");
+                        writer.close();
+                }
+                String readplayer()throws IOException{
+                    BufferedReader br = new BufferedReader(new FileReader("players.txt"));
+                    String g;
+                    g=br.readLine();
+                    System.out.println(g);
+                    return g;
+                }
+                
+                public static void main(String args[]) {
+                    Level a= new Level();
+                    try{
+                    a.saveplayer("test",15);
+                    a.saveplayer("test2",25);
+                    a.saveplayer("test3",55);
+                    System.out.println(a.readplayer());
+                    }catch (IOException e){
+                        
+                    }
+                }
+                
 		//en dessous de ce commentaire = a supprimer plus tard, seulement pour sauvegarder les niveaux de ce fichier
 //		void writelevels() throws FileNotFoundException, IOException{
 //			for(int i=1;i<=5;++i)
