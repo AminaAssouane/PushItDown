@@ -46,8 +46,8 @@ public class Joueur {
 			this.bestScore = this.score;	
 	}
 	
-	/* Si le nombre de coups effectué est égale à la longueur du plateau + sa largeur (situation optimale, 
-	 * c'est le minimum de coups effectués possible, alors le score obtenu est 50)
+	/* Si le nombre de coups effectue est egale a la longueur du plateau + sa largeur (situation optimale, 
+	 * c'est le minimum de coups effectuï¿½s possible, alors le score obtenu est 50)
 	 * */
 	public void scoreLevel(int taille){
 		if (this.nbCoups == taille)
