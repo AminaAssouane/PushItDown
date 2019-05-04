@@ -17,6 +17,7 @@ public class Plateau {
     public Plateau(JLayeredPane pa, Level l, int niv, Bille b, Joueur jou) {
         this.actuel = jou;
         jou.getList().clear();
+        deplist.clear();
         this.niv = niv;
         this.l = l;
         this.x = l.getX(niv);
