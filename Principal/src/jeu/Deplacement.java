@@ -21,7 +21,6 @@ public class Deplacement implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int touche = e.getKeyCode();
-		System.out.println("\nMAAAAARCHE");
 		switch (touche){
 		case KeyEvent.VK_RIGHT :
 			Plateau.Deplacement_mem d = plat.new Deplacement_mem(b, b.getX()+1, b.getY(), b.getZ());
@@ -45,7 +44,6 @@ public class Deplacement implements KeyListener{
 			}
 			break;
 		case KeyEvent.VK_DOWN :
-			System.out.println("\nWHY THOUGH");
 			//System.out.println(b.getX()); //+ " " + b.getY() + " " + b.getZ());
 			d = plat.new Deplacement_mem(b, b.getX(), b.getY()+1, b.getZ());
             o = plat.deplacement(d,"DOWN");
