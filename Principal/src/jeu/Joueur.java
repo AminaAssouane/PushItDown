@@ -23,6 +23,10 @@ public class Joueur {
 		this.avatar = null;
 	}
 	
+        public void setNbCoups(int n){
+            this.nbCoups = 0;
+        }
+        
 	// Ajoute un deplacement � la liste de coups 
 	public void addCoup(Plateau.Deplacement_mem dep){
 		this.listCoups.addLast(dep);
@@ -64,6 +68,14 @@ public class Joueur {
 	
 	/* GETTERS AND SETTERS */
 	
+        public int getScore(){
+		return this.score;
+	}
+	
+	public void setScore(int sc){
+		this.score = sc;
+	}
+        
 	public String getNom() {
 		return nom;
 	}
