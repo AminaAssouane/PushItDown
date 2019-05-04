@@ -108,6 +108,10 @@ public class Editeur {
         e.add((byte) 2, (byte) 2, (byte) 0);
         e.add((byte) 2, (byte) 3, (byte) 0);
         e.enregister("ter");
+        EditeurVue ev =new EditeurVue();
+        byte[][][] a={{{1,1,1,1},{1,1,1,1},{1,1,1,1}},{{1,1,1,1},{1,1,1,1},{1,1,1,1}}};
+        e.plateau=a;
+        ev.afficherplateau(e.plateau);//
         
     }
 
