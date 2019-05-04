@@ -47,7 +47,7 @@ public class EditeurVue {
 			int down=2*middle;
 			for(int i = 0;i<x;++i) 
 				for(int j = 0;j<y;++j)
-					for(int k = z;k>0;--k) {
+					for(int k = 0;k<z;++k) {
 						System.out.println(i+""+j+""+k+" "+blocs[i][j][k]);
 						grid[i][j][k]=new Bloc(blocs[i][j][k]);
 						grid[i][j][k].jl.setBounds(
