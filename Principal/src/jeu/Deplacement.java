@@ -80,8 +80,9 @@ public class Deplacement implements KeyListener{
 		this.plat.getPanel().add(feux,1000,1);
 		this.plat.getPanel().add(feux2,1000,1);
 		/* Le bouton NEXT s'affiche */
-		if (btnNext != null) 
+		if (btnNext != null) {
 			btnNext.setVisible(true);
+		}
 	}
 
 }

@@ -18,7 +18,7 @@ public class InterfaceJeu {
     private Plateau plat;
     private JLayeredPane pa;
     private Deplacement d;
-    JButton btnNext, btnRetour, btnVue, btnRetour2;
+    JButton btnNext, btnRetour, btnVue, btnRetour2, btnRestart;
     int indBille = 0;
 
     public void nextLevel() throws IOException {
@@ -68,8 +68,7 @@ public class InterfaceJeu {
         }
         b = new Bille(0, 0, indBille, pa);
 
-        d = new Deplacement(plat, b, btnNext);
-        pa.addKeyListener(d);
+        
 
         JLabel lblJoueur = new JLabel("");
         lblJoueur.setIcon(new ImageIcon("images\\joueur.png"));
@@ -142,13 +141,14 @@ public class InterfaceJeu {
 		btnVue.setBounds(452, 484, 208, 41);
 		pa.add(btnVue);
 		
-		JButton btnRestart = new JButton("");
+		btnRestart = new JButton("");
 		btnRestart.setBackground(new Color(128, 128, 128));
 		btnRestart.setIcon(new ImageIcon("images\\recommencer.png"));
 		btnRestart.setBounds(451, 432, 209, 41);
 		pa.add(btnRestart);
 		
-        
+		d = new Deplacement(plat, b, btnNext);
+        pa.addKeyListener(d);
 
         f.getContentPane().setBackground(new Color(0, 0, 0));
         f.setLocationRelativeTo(null);
