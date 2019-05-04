@@ -174,14 +174,14 @@ public class Level {
 
 		void changelvl(int n) throws IOException{
 			currentlvl=n;
-			file="level"+n;
+			file="levels\\level"+n;
 			readlvl(file);
 		}
 		void nextlvl() throws IOException{
 			currentlvl++;
-			file="level"+currentlvl;
+			file="levels\\level"+currentlvl;
 			readlvl(file);
-		}
+		} 
 		//en dessous de ce commentaire = a supprimer plus tard, seulement pour sauvegarder les niveaux de ce fichier
 //		void writelevels() throws FileNotFoundException, IOException{
 //			for(int i=1;i<=5;++i)
