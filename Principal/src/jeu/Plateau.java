@@ -152,10 +152,14 @@ public class Plateau {
                         deplist.add(me);
                         /* deplacement de la bille */
                         plateau[d.x2][d.y2][oldZ2].entite = d.entite;
+
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
+
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
-                        d.entite.setZ(oldZ2);
+                        if (d.z2 == -1) {
+                            d.z2 = 0;
+                        }
                         actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
@@ -190,7 +194,9 @@ public class Plateau {
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
-                        d.entite.setZ(oldZ2);
+                        if (d.z2 == -1) {
+                            d.z2 = 0;
+                        }
                         actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
@@ -230,7 +236,10 @@ public class Plateau {
                         d.entite.deplacer(d.x2, d.y2, oldZ2, plateau[d.x2][d.y2][oldZ2 + 1].numBloc);
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
-                        d.entite.setZ(oldZ2);
+                        if (d.z2 == -1) {
+                            d.z2 = 0;
+                        }
+
                         actuel.addCoup(d.inverse());
                         return test_final(d.entite);
                     }
@@ -258,7 +267,7 @@ public class Plateau {
                         int a2 = d.x2;
                         int b2 = d.y2;
                         int c2 = oldZ2 + 1;
-
+                        plateau[a2][b2][c2].jl.setName("vide");
                         Deplacement_mem me = new Deplacement_mem(null, a1, a2, b1, b2, c1, c2);
 
                         deplist.add(me);
@@ -269,6 +278,10 @@ public class Plateau {
                         d.entite.setX(d.x2);
                         d.entite.setY(d.y2);
                         d.entite.setZ(oldZ2);
+                        if (d.z2 == -1) {
+                            d.z2 = 0;
+                        }
+
                         actuel.addCoup(d.inverse());
 
                         return test_final(d.entite);
@@ -280,21 +293,13 @@ public class Plateau {
         }
     }
 
-    /* Fonction de deplacement bloc/bille (elle appelle la fonction de deplacement bloc) */
-    public static void test() {
-        return;
-    }
-
     protected boolean deplacement(Deplacement_mem d, String direction) {
-
         if (d == null) {
-
             return false;
         }
 
         /* Verifie s'il y a un bloc qui barre le passage, si oui on essaye de le bouger */
         if (dansletableau(d.x2, d.y2, d.z2 + 1) && (!plateau[d.x2][d.y2][d.z2 + 1].jl.getName().equals("vide"))) {// && (plateau[d.x2][d.y2][d.z2 + 1].jl.getName() != "ii0"))) {        	
-
             return deplacementBloc(d, direction);
         }
 
@@ -313,13 +318,12 @@ public class Plateau {
                 return test_final(d.entite);
             }
         }
-
         return false;
     }
 
     /* Fonction qui vérifie s'il y a une bille dans la case (x,y,z) */
     private boolean occupe(int x, int y, int z) {
-        return (dansletableau(x, y, z) && plateau[x][y][z].entite != null);
+        return (dansletableau(x, y, z) && (plateau[x][y][z].entite != null));
     }
 
     public boolean occupe(Deplacement_mem dpm) {
@@ -336,7 +340,6 @@ public class Plateau {
         }
         for (int i = 0; i < n; i++) {
             Deplacement_mem dm = actuel.getList().get(actuel.getList().size() - 1 - i);
-
             if (!plateau[dm.x2][dm.y2][dm.z2 + 1].jl.getName().equals("vide")) {
                 actuel.getList().remove(actuel.getList().size() - 1);
                 if (actuel.getList().size() > 0) {
@@ -344,19 +347,20 @@ public class Plateau {
                     d.x1 = dm.x1;
                     d.y1 = dm.y1;
                     d.z1 = dm.z1;
+                    return coup_arriere(n);
                 }
-                return coup_arriere(n);
             }
 
             if (plateau[dm.x2][dm.y2][dm.z2].jl.getName().equals("vide")) {
-                actuel.getList().remove(actuel.getList().size() - 1);
+                actuel.getList().remove(actuel.getList().size() - 1 - i);
                 if (actuel.getList().size() > 0) {
                     Deplacement_mem d = actuel.getList().get(actuel.getList().size() - 1 - i);
                     d.x1 = dm.x1;
                     d.y1 = dm.y1;
                     d.z1 = dm.z1;
+                    return coup_arriere(n);
                 }
-                return coup_arriere(n);
+
             }
 
             if (!deplacementr(dm, dm.x1, dm.y1, dm.z1, dm.x2, dm.y2, dm.z2)) {
@@ -368,24 +372,37 @@ public class Plateau {
     }
 
     private boolean deplacementr(Deplacement_mem m, int x0, int y0, int z0, int x, int y, int z) {
-        if (!dansletableau(x0, y0, z0) || !dansletableau(x, y, z)
-                || occupe(x, y, z)) {
-
-            // coordonnées pas dans le tableau OU case d'arrivée occupée
-            return false;
-        }
-
-        Entite e = plateau[x0][y0][z0].entite;
-        plateau[x0][y0][z0].entite = null;
         //suppression entitée case d'origine
-        plateau[x][y][z].entite = e;
-
-        m.entite.deplacer(m.x2, m.y2, m.z2, plateau[m.x2][m.y2][m.z2 + 1].numBloc);
-        m.entite.setX(m.x2);
-        m.entite.setY(m.y2);
-        m.entite.setZ(m.z2);
+        if ((m.z2 != -1) && dansletableau(m.x2, m.y2, m.z2) && !occupe(m.x2, m.y2, m.z2)) {
+            if (supprimer_entite(m.entite)) {
+                plateau[m.x2][m.y2][m.z2].entite = m.entite;
+                m.entite.deplacer(m.x2, m.y2, m.z2, plateau[m.x2][m.y2][m.z2 + 1].numBloc);
+                m.entite.setX(m.x2);
+                m.entite.setY(m.y2);
+                m.entite.setZ(m.z2);
+                test_final(m.entite);
+                return true;
+            }
+        }
         //ajout case d'arrivée
-        return true;
+        return false;
+    }
+
+    public JLayeredPane getPanel() {
+        return this.pa;
+    }
+
+    public Cellule getCellule(int x, int y, int z) {
+        return plateau[x][y][z];
+    }
+
+    public void afficherl() {
+        System.out.println("Liste des coordonnees");
+        for (Deplacement_mem m : actuel.getList()) {
+            System.out.println(m.x1 + "|" + m.y1 + "|" + m.z1);
+            System.out.println(m.x2 + "|" + m.y2 + "|" + m.z2);
+
+        }
     }
 
     public boolean blocarriere() {
@@ -397,6 +414,7 @@ public class Plateau {
                 plateau[aux.x2][aux.y2][aux.z2].deplacer(aux.x2, aux.y2, aux.z2);
                 plateau[aux.x1][aux.y1][aux.z1].vider(aux.x1, aux.y1, aux.z1);
                 deplist.remove(deplist.size() - 1);
+                InterfaceJeu.actualiservue();
                 return true;
             }
         }
@@ -534,26 +552,4 @@ public class Plateau {
     }
 
     // GETTERS AND SETTERS
-    public JLayeredPane getPanel() {
-        return this.pa;
-    }
-
-    public Cellule getCellule(int x, int y, int z) {
-        return plateau[x][y][z];
-    }
-
-    //* CODE POUR LA CREATION DE PLATEAU, EDITEUR GRAPHIQUE
-    /*
-        Test s'il y a une cellule en dessous
-        puis essaye d'ajouter l'entité si oui
-        Uniquement si la cellule d'en dessous est vide !
-     */
-    protected boolean ajouterEntite(Entite j, int x, int y, int z) {
-        if (dansletableau(x, y, z) && plateau[x][y][z] != null && plateau[x][y][z].entite == null) {
-            plateau[x][y][z].entite = j;
-            return true;
-        }
-        return false;
-    }
-
 }
