@@ -216,6 +216,7 @@ public class InterfaceJeu {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 recommencer();
+                pa.requestFocus();
             }
         });
         btnRestart.setBounds(451, 432, 209, 41);
