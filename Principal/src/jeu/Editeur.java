@@ -2,6 +2,7 @@ package jeu;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 public class Editeur {
 
@@ -108,13 +109,19 @@ public class Editeur {
         e.add((byte) 2, (byte) 2, (byte) 0);
         e.add((byte) 2, (byte) 3, (byte) 0);
         e.enregister("ter");
-        EditeurVue ev =new EditeurVue();
-        byte[][][] a={{{1,1,1,1},{1,1,1,1},{1,1,1,1}},{{1,1,1,1},{1,1,1,1},{1,1,1,1}}};
+        byte[][][] a={{{1,2,1,1},{1,1,2,1},{1,3,1,1}},{{1,1,1,4},{1,1,1,1},{1,0,1,0}}};
         e.plateau=a;
-        ev.afficherplateau(e.plateau);//
+        EditeurVue ev =new EditeurVue();
+        JFrame plp=new JFrame();
+        plp.setSize(600, 600);
+	plp.setLayout(null);
+	plp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        plp.setVisible(true);
+        ev.afficherplateau(e.plateau, plp,100,100);//
         
     }
 
+   
     private class Triplet {
 
         byte x;
