@@ -31,16 +31,7 @@ public class Accueil {
 
 		Controleur_DebutPartie cd = new Controleur_DebutPartie();
 		
-                JButton btnEditeur = new JButton ("Editeur de carte");
                 
-                btnEditeur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-		});
-               
-                btnEditeur.setBounds(200,580,132,23);
-                frame.getContentPane().add(btnEditeur);
                 
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBackground(Color.BLACK);
@@ -55,12 +46,12 @@ public class Accueil {
 		btnNewButton.setBounds(200, 322, 281, 62);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon("images\\ancienjoueur.png"));
+		JButton btnEditeur = new JButton("");
+		btnEditeur.setIcon(new ImageIcon("images\\editeurdecarte.png"));
 		//btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBackground(Color.BLACK);
-		btnNewButton_1.setBounds(200, 382, 281, 57);
-		frame.getContentPane().add(btnNewButton_1);
+		btnEditeur.setBackground(Color.BLACK);
+		btnEditeur.setBounds(200, 382, 281, 57);
+		frame.getContentPane().add(btnEditeur);
 		
 		JLabel lblPushItDown = new JLabel("");
 		lblPushItDown.setIcon(new ImageIcon("images\\pushitdown3.png"));
@@ -70,9 +61,14 @@ public class Accueil {
 		frame.getContentPane().add(lblPushItDown);
 		
 		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setIcon(new ImageIcon("images\\classement.png"));
+		btnNewButton_2.setIcon(new ImageIcon("images\\quitter.png"));
 		btnNewButton_2.setBackground(Color.BLACK);
-		btnNewButton_2.setBounds(200, 437, 281, 57);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnNewButton_2.setBounds(200, 497, 281, 57);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		Help h = new Help(this);
@@ -84,7 +80,7 @@ public class Accueil {
 				h.getFrame().setVisible(true);
 			}
 		});
-		btnNewButton_3.setBounds(200, 493, 281, 64);
+		btnNewButton_3.setBounds(200, 437, 281, 64);
 		frame.getContentPane().add(btnNewButton_3);
 	}
 	
