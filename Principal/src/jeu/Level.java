@@ -127,9 +127,7 @@ public class Level {
 		void readlvleditor(String path) throws IOException {
 			FileInputStream fis = new FileInputStream(path);
 			fis.read(dimensions);
-			System.out.println("dimensions are X"+dimensions[0]+" Y"+dimensions[1]+" Z"+dimensions[2]);
 			level=new byte[dimensions[0]*dimensions[1]*dimensions[2]];
-			System.out.println("there are "+level.length+"bytes");
 			fis.read(level);
 			
 			fis.close();
@@ -147,11 +145,8 @@ public class Level {
 		void readlvl(String path) throws IOException {
 			FileInputStream fis = new FileInputStream(path);
 			fis.read(dimensions);
-			System.out.println("dimensions are X"+dimensions[0]+" Y"+dimensions[1]+" Z"+dimensions[2]);
 			level=new byte[dimensions[0]*dimensions[1]*dimensions[2]];
-			System.out.println("there are "+level.length+"bytes");
-			fis.read(level);
-			
+			fis.read(level);			
 			fis.close();
 		}
 		
@@ -208,7 +203,6 @@ public class Level {
                     a.saveplayer("test",15);
                     a.saveplayer("test2",25);
                     a.saveplayer("test3",55);
-                    System.out.println(a.readplayer());
                     }catch (IOException e){
                         
                     }
