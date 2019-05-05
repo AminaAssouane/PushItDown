@@ -36,7 +36,7 @@ public class Accueil {
 		JButton btnNewButton = new JButton("");
 		btnNewButton.setBackground(Color.BLACK);
 		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setIcon(new ImageIcon("images\\nouveaujoueur.png"));
+		btnNewButton.setIcon(new ImageIcon("images\\nouvellepartie.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cd.nouveauJoueur();
